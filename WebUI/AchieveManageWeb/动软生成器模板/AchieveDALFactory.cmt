@@ -1,0 +1,33 @@
+﻿
+
+<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;
+	string returnValue = "void";
+    if (identityKey!=null)
+    {         
+         returnValue = CodeCommon.DbTypeToCS(identityKey.TypeName);              
+    }
+#>
+using System;
+using System.Reflection;
+using System.Configuration;
+using Maticsoft.IDAL;
+namespace <#= host.NameSpace #>.DALFactory
+{
+	/// <summary>
+	/// 如果在这里创建对象报错，请检查web.config里是否修改了<add key="DAL" value="Maticsoft.SQLServerDAL" />。
+	/// </summary>
+	public sealed partial class DataAccess
+	{
+       	  public static I<#= host.TableName.Replace("tb","") #>DAL Get<#= host.TableName.Replace("tb","") #>DAL()
+		{
+		 	 I<#= host.TableName.Replace("tb","") #>DAL dal = GetInstance("<#= host.TableName.Replace("tb","") #>DAL") as I<#= host.TableName.Replace("tb","") #>DAL;
+             return dal;	
+		}
+        
+    }
+}

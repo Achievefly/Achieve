@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/NFineUI/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/NFineUI/js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/NFineUI/js/bootstrap/bootstrap.js"></script>
+    <link href="~/Content/NFineUI/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/layout/jquery.layout.js"></script>
+    <script src="~/Content/NFineUI/js/wdtree/tree.js"></script>
+    <link href="~/Content/NFineUI/js/wdtree/tree.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/jqgrid/jqgrid.min.js"></script>
+    <link href="~/Content/NFineUI/js/jqgrid/jqgrid.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/jqgrid/grid.locale-cn.js"></script>
+    <link href="~/Content/NFineUI/css/framework-ui.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/framework-ui.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    @RenderBody()
+    @Html.AntiForgeryToken()
+</body>
+</html>

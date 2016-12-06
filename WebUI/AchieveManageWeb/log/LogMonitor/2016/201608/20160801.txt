@@ -1,0 +1,96 @@
+
+ 
+记录时间：2016-08-01 17:04:18,899 
+线程ID:[9] 
+日志级别：  INFO  
+跟踪描述：
+            Action执行时间监控：
+            ControllerName：HomeController
+            ActionName:Index
+            开始时间：2016/8/1 17:04:18
+            结束时间：2016/8/1 17:04:18
+            总 时 间：0.0090606秒
+            Form表单数据：
+            URL参数：
+                    
+ 
+
+ 
+记录时间：2016-08-01 17:04:18,991 
+线程ID:[9] 
+日志级别：  INFO  
+跟踪描述：
+            View视图生成时间监控：
+            ControllerName：HomeController
+            ViewName:Index
+            开始时间：2016/8/1 17:04:18
+            结束时间：2016/8/1 17:04:18
+            总 时 间：0.0710341秒
+            Form表单数据：
+            URL参数：
+                    
+ 
+
+ 
+记录时间：2016-08-01 17:04:19,038 
+线程ID:[8] 
+日志级别：  INFO  
+跟踪描述：
+            Action执行时间监控：
+            ControllerName：LoginController
+            ActionName:Index
+            开始时间：2016/8/1 17:04:19
+            结束时间：2016/8/1 17:04:19
+            总 时 间：0.0100679秒
+            Form表单数据：
+            URL参数：
+                    
+ 
+
+ 
+记录时间：2016-08-01 17:04:20,081 
+线程ID:[8] 
+日志级别：  INFO  
+跟踪描述：
+            View视图生成时间监控：
+            ControllerName：LoginController
+            ViewName:Index
+            开始时间：2016/8/1 17:04:19
+            结束时间：2016/8/1 17:04:20
+            总 时 间：1.0427884秒
+            Form表单数据：
+            URL参数：
+                    
+ 
+
+ 
+记录时间：2016-08-01 17:04:20,503 
+线程ID:[8] 
+日志级别：  INFO  
+跟踪描述：
+            Action执行时间监控：
+            ControllerName：ValidatorController
+            ActionName:GetValidatorGraphics
+            开始时间：2016/8/1 17:04:20
+            结束时间：2016/8/1 17:04:20
+            总 时 间：0.0420856秒
+            Form表单数据：
+            URL参数：
+                    
+ 
+
+ 
+记录时间：2016-08-01 17:04:20,621 
+线程ID:[8] 
+日志级别：  INFO  
+跟踪描述：
+            View视图生成时间监控：
+            ControllerName：ValidatorController
+            ViewName:GetValidatorGraphics
+            开始时间：2016/8/1 17:04:20
+            结束时间：2016/8/1 17:04:20
+            总 时 间：0.1181308秒
+            Form表单数据：
+            URL参数：
+                    
+ 

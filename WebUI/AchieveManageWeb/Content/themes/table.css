@@ -1,0 +1,27 @@
+﻿* {
+    font-size: 13px;
+}
+
+/*body {
+    background: #D2E0F2;
+}*/
+
+.tableForm {
+    border-collapse: collapse;
+}
+
+    .tableForm th {
+        text-align: right;
+        border: 1px solid #ccc;
+        padding: 3px;
+        background-color: #F5F5F5;
+        height: 25px;
+    }
+
+    .tableForm td {
+        text-align: left;
+        border: 1px solid #ccc;
+        padding: 3px;
+        background-color: white;
+        height: 25px;
+    }

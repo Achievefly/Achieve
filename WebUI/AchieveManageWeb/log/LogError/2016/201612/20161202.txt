@@ -1,0 +1,66 @@
+
+ 
+记录时间：2016-12-02 17:18:26,808 
+线程ID:[34] 
+日志级别：  ERROR 
+错误描述：在执行 controller[UserController] 的 action[SubmitForm] 时产生异常
+ 
+System.ArgumentNullException: 值不能为 null。
+参数名: collection
+   在 System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)
+   在 System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)
+   在 SqlSugar.SqlSugarToolExtensions.ArrayAdd(String[] thisValue, String[] items)
+   在 SqlSugar.SqlSugarClient.AddDisableUpdateColumns(String[] columns)
+   在 AchieveCommon.Base.BaseDAL`1.Update(T obj, String[] disablestr) 位置 e:\Achieve\Common\AchieveCommon\Base\BaseDAL.cs:行号 40
+   在 AchieveBLL.Sys_UserBLL.Update(Sys_User obj, String[] disablestr) 位置 e:\Achieve\BLL\AchieveBLL\Sys_UserBLL.cs:行号 61
+   在 AchieveManageWeb.Areas.SystemManage.Controllers.UserController.SubmitForm(Sys_User userEntity, String keyValue) 位置 e:\Achieve\WebUI\AchieveManageWeb\Areas\SystemManage\Controllers\UserController.cs:行号 50
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+ 
+记录时间：2016-12-02 17:21:27,093 
+线程ID:[9] 
+日志级别：  ERROR 
+错误描述：在执行 controller[UserController] 的 action[SubmitForm] 时产生异常
+ 
+SqlSugar.SqlSugarException: 错误信息          ： 【列名 'logon' 无效。】
+ORM生成的Sql ： 【 UPDATE [Sys_User] SET  [F_Account]=@F_Account  , [F_RealName]=@F_RealName  , [F_NickName]=@F_NickName  , [F_Gender]=@F_Gender  , [F_Birthday]=@F_Birthday  , [F_MobilePhone]=@F_MobilePhone  , [F_Email]=@F_Email  , [F_WeChat]=@F_WeChat  , [F_ManagerId]=@F_ManagerId  , [F_OrganizeId]=@F_OrganizeId  , [F_DepartmentId]=@F_DepartmentId  , [F_RoleId]=@F_RoleId  , [F_DutyId]=@F_DutyId  , [F_IsAdministrator]=@F_IsAdministrator  , [F_SortCode]=@F_SortCode  , [F_DeleteMark]=@F_DeleteMark  , [F_EnabledMark]=@F_EnabledMark  , [F_Description]=@F_Description  , [F_CreatorTime]=@F_CreatorTime  , [F_CreatorUserId]=@F_CreatorUserId  , [F_LastModifyTime]=@F_LastModifyTime  , [F_LastModifyUserId]=@F_LastModifyUserId  , [F_DeleteTime]=@F_DeleteTime  , [F_DeleteUserId]=@F_DeleteUserId  , [logon]=@logon  WHERE [F_Id] = @F_Id】
+函数参数         ： 【{"rowObj":{"F_Id":"","F_Account":"test0001","F_RealName":"测试","F_NickName":null,"F_HeadIcon":null,"F_Gender":true,"F_Birthday":"\/Date(1480521600000)\/","F_MobilePhone":null,"F_Email":null,"F_WeChat":null,"F_ManagerId":null,"F_SecurityLevel":0,"F_Signature":null,"F_OrganizeId":null,"F_DepartmentId":null,"F_RoleId":null,"F_DutyId":null,"F_IsAdministrator":false,"F_SortCode":null,"F_DeleteMark":null,"F_EnabledMark":true,"F_Description":"胜多负少","F_CreatorTime":null,"F_CreatorUserId":null,"F_LastModifyTime":null,"F_LastModifyUserId":null,"F_DeleteTime":null,"F_DeleteUserId":null,"F_Password":null,"logon":null},"whereIn":[]}】
+
+   在 SqlSugar.SqlSugarClient.Update[T,FiledType](Object rowObj, FiledType[] whereIn)
+   在 SqlSugar.SqlSugarClient.Update[T](T rowObj)
+   在 AchieveCommon.Base.BaseDAL`1.Update(T obj, String[] disablestr) 位置 e:\Achieve\Common\AchieveCommon\Base\BaseDAL.cs:行号 41
+   在 AchieveBLL.Sys_UserBLL.Update(Sys_User obj, String[] disablestr) 位置 e:\Achieve\BLL\AchieveBLL\Sys_UserBLL.cs:行号 61
+   在 AchieveManageWeb.Areas.SystemManage.Controllers.UserController.SubmitForm(Sys_User userEntity, String keyValue) 位置 e:\Achieve\WebUI\AchieveManageWeb\Areas\SystemManage\Controllers\UserController.cs:行号 50
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)

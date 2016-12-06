@@ -1,0 +1,68 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;
+	string returnValue = "void";
+    if (identityKey!=null)
+    {         
+         returnValue = CodeCommon.DbTypeToCS(identityKey.TypeName);              
+    }
+#>
+
+using AchieveEntity;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+
+namespace AchieveInterfaceDAL
+{
+	/// <summary>
+	/// 接口层<#= host.GetDALClass(host.TableName) #>
+	/// </summary>
+	public interface I<#= host.TableName.Replace("tb","") #>DAL
+	{
+		#region  成员方法
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		bool Exists(<#= CodeCommon.GetInParameter(host.Keys, false) #>);
+		
+		/// <summary>
+		/// 增加一条数据
+		/// </summary>
+		int Add(<#= host.TableName.Replace("tb","") #>Entity model);
+		
+		/// <summary>
+		/// 更新一条数据
+		/// </summary>
+		int Update(<#= host.TableName.Replace("tb","") #>Entity model);
+		
+		/// <summary>
+		/// 删除数据
+		/// </summary>
+		bool Delete(<#=CodeCommon.GetInParameter(host.Keys, true)#>);
+		
+		bool DeleteList(string idList );
+		
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		<#= host.TableName #>Entity GetModel(<#= CodeCommon.GetInParameter(host.Keys,true) #>);
+		
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		DataTable GetList(string strWhere);
+		
+		/// <summary>
+		/// 获得前几行数据
+		/// </summary>
+		DataTable GetList(int Top,string strWhere,string filedOrder);
+		
+		#endregion  成员方法
+	} 
+}
