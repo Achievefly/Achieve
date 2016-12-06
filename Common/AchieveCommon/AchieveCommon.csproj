@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="AES.cs" />
     <Compile Include="Base\BaseDAL.cs" />
+    <Compile Include="Base\SugarConfigs.cs" />
     <Compile Include="Comm.cs" />
     <Compile Include="CookiesHelper.cs" />
     <Compile Include="DataConvert.cs" />

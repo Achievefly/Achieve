@@ -2,9 +2,14 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Data;
+using SqlSugar;
 namespace AchieveEntity
 {
     //行政区域表
+    /// <summary>
+    /// 属性只作为初始化映射，SetMappingTables和SetMappingColumns可以覆盖
+    /// </summary>
+    [SugarMapping(TableName = "Sys_Area")]//表别名设置，会被
     public class Sys_Area
     {
 

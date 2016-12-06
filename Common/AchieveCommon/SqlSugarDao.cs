@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AchieveCommon.Base;
 using SqlSugar;
 
 namespace AchieveCommon
@@ -27,7 +28,8 @@ namespace AchieveCommon
         public static SqlSugarClient GetInstance()
         {
             var db = new SqlSugarClient(ConnectionString);
-            db.IsEnableLogEvent = true;//Enable log events
+            db.SetMappingTables(SugarConfigs.MpList);//设置关联表 (引用地址赋值，每次赋值都只是存储一个内存地址)
+            db.IsEnableLogEvent = true;//启用监控
             db.LogEventStarting = (sql, par) => { AchieveCommon.WriteLog.WriteMessage("SQLLogInfo", sql + " " + par + "\r\n"); };
             return db;
         }
