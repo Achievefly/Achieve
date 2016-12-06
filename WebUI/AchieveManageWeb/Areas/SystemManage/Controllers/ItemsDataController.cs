@@ -58,7 +58,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 itemsDetailEntity.F_Id = keyValue;
                 itemsDetailEntity.F_LastModifyUserId = uInfo.F_Account;
                 itemsDetailEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "F_CreatorUserId", "F_CreatorTime" };
+                string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_ParentId", "F_ItemId" };
                 itemsDetailApp.Update(itemsDetailEntity, notstr);
             }
             return Success("操作成功。");

@@ -7,6 +7,7 @@ using AchieveBLL;
 using AchieveManageWeb.App_Start.BaseController;
 using AchieveEntity;
 using System;
+using AchieveCommon.Web;
 using AchieveCommon.Web.Tree;
 using AchieveCommon.Web.TreeView;
 using AchieveCommon.Web.TreeGrid;
@@ -56,10 +57,14 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson()
+        public ActionResult GetTreeGridJson(string keyword="")
         {
             var data = itemsApp.GetList();
             var treeList = new List<TreeGridModel>();
+            if (keyword != "" && keyword != null)
+            {
+                data = data.TreeWhere(c => c.F_FullName.Contains(keyword));
+            }
             foreach (Sys_Items item in data)
             {
                 TreeGridModel treeModel = new TreeGridModel();
@@ -99,7 +104,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 itemsEntity.F_Id = keyValue;
                 itemsEntity.F_LastModifyUserId = uInfo.F_Account;
                 itemsEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
+                string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime", "F_ParentId" };
                 itemsApp.Update(itemsEntity, notstr);
             }
             return Success("操作成功。");
