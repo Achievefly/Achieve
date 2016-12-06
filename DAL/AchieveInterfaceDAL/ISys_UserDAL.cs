@@ -36,7 +36,7 @@ namespace AchieveInterfaceDAL
         /// <param name="pagination"></param>
         /// <param name="keyword"></param>
         /// <returns></returns>
-        List<Sys_User> GetList(Pagination pagination, string keyword, out int records);
+        List<Sys_User> GetPageList(Pagination pagination, string keyword, out int records);
         /// <summary>
         /// 重置密码
         /// </summary>

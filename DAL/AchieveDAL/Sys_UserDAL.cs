@@ -79,24 +79,38 @@ namespace AchieveDAL
         /// <param name="keyword"></param>
         /// <param name="records"></param>
         /// <returns></returns>
-        public List<Sys_User> GetList(Pagination pagination, string keyword,out int records)
+        public List<Sys_User> GetPageList(Pagination pagination, string keyword,out int records)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                List<Sys_User> list = null;
-                var data = db.Queryable<Sys_User>().
-                        OrderBy(pagination.sidx + " " + pagination.sord).
-                        Skip(pagination.rows * (pagination.page - 1)).
-                        Take(pagination.rows * pagination.page);
-                var count = db.Queryable<Sys_User>();
+                //List<Sys_User> list = null;
+                //var data = db.Queryable<Sys_User>().
+                //        OrderBy(pagination.sidx + " " + pagination.sord).
+                //        Skip(pagination.rows * (pagination.page - 1)).
+                //        Take(pagination.rows * pagination.page);
+                //var count = db.Queryable<Sys_User>();
 
-                list = data.ToList();
-                records = count.Count();
+                //list = data.ToList();
+                //records = count.Count();
+                //if (keyword != null && keyword != "")
+                //{
+                //    list = data.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).ToList();
+                //    records = count.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).Count(); ;
+                //}
+                var pageCount = 0;
+                List<Sys_User> list = null; 
                 if (keyword != null && keyword != "")
                 {
-                    list = data.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).ToList();
-                    records = count.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).Count(); ;
+                    list = db.Queryable<Sys_User>().
+                        Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).
+                        OrderBy(pagination.sidx + " " + pagination.sord).ToPageList(pagination.page, pagination.rows, ref pageCount);
                 }
+                else
+                {
+                    list = db.Queryable<Sys_User>().OrderBy(pagination.sidx + " " + pagination.sord).ToPageList(pagination.page, pagination.rows, ref pageCount);
+                }
+                records = pageCount;
+                //更多分页函数
                 return list;
             }
         }

@@ -22,7 +22,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
             int records = 0;
             var data = new
             {
-                rows = userApp.GetList(pagination, keyword,out records),
+                rows = userApp.GetPageList(pagination, keyword, out records),
                 total = records % pagination.rows == 0 ? records / pagination.rows : records / pagination.rows + 1,
                 page = pagination.page,
                 records = records

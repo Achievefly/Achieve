@@ -48,9 +48,9 @@ namespace AchieveBLL
         /// <param name="keyword"></param>
         /// <param name="records"></param>
         /// <returns></returns>
-        public List<Sys_User> GetList(Pagination pagination, string keyword, out int records)
+        public List<Sys_User> GetPageList(Pagination pagination, string keyword, out int records)
         {
-            return dal.GetList(pagination, keyword, out records);
+            return dal.GetPageList(pagination, keyword, out records);
         }
 
         public int RevisePassword(string id, string password)

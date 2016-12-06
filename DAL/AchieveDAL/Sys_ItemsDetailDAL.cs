@@ -18,7 +18,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<Sys_ItemsDetail> GetList(string id = "",string keyvalue="")
+        public override List<Sys_ItemsDetail> GetList(string id = "",string keyvalue="")
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -48,7 +48,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Sys_ItemsDetail GetForm(string id)
+        public override Sys_ItemsDetail GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {

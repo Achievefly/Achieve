@@ -61,5 +61,46 @@ namespace AchieveCommon.Base
                 return i;
             }
         }
+        public virtual List<T> GetList(string table)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                List<T> list = new List<T>();
+                list = db.SqlQuery<T>("select * from " + table).ToList<T>();
+                return list;
+            }
+        }
+        public virtual T GetForm(string table,string id)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                List<T> list = new List<T>();
+                list = db.SqlQuery<T>("select * from " + table + " where F_Id=@F_Id", new {F_Id=id }).ToList<T>();
+                if (list.Count > 0)
+                {
+                    return list[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public virtual T GetForm(string table,string idstr, string idvalue)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                List<T> list = new List<T>();
+                list = db.SqlQuery<T>("select * from " + table + " where " + idstr + "=@F_Id", new { F_Id = idvalue }).ToList<T>();
+                if (list.Count > 0)
+                {
+                    return list[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

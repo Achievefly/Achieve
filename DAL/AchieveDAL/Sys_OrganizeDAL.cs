@@ -40,7 +40,7 @@ namespace AchieveDAL
             }
 
         }
-        public List<Sys_Organize> GetList(string id = "")
+        public override List<Sys_Organize> GetList(string id = "")
         {
             using (var db = SqlSugarDao.GetInstance())
             {
