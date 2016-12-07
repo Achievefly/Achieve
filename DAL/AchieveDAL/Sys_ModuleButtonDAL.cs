@@ -11,26 +11,26 @@ using SqlSugar;
 
 namespace AchieveDAL
 {
-    public class Sys_ItemsDAL : BaseDAL<Sys_Items>, ISys_ItemsDAL
+    public class Sys_ModuleButtonDAL : BaseDAL<Sys_ModuleButton>, ISys_ModuleButtonDAL
     {
         /// <summary>
-        /// 获取所有机构
+        /// 获取所有菜单
         /// </summary>
-        public List<Sys_Items> GetAllModule()
+        public List<Sys_ModuleButton> GetAllModule()
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                List<Sys_Items> list = db.Queryable<Sys_Items>().Where(c => c.F_ParentId == "0").ToList();
+                List<Sys_ModuleButton> list = db.Queryable<Sys_ModuleButton>().Where(c => c.F_ParentId == "0").ToList();
                 if (list.Count > 0)
                 {
-                    foreach (var c in list)
-                    {
-                        List<Sys_Items> listch = GetList(c.F_Id);
-                        if (listch != null)
-                        {
-                            c.ChildNodes = listch;
-                        }
-                    }
+                    //foreach (var c in list)
+                    //{
+                    //    List<Sys_Module> listch = GetList(c.F_Id);
+                    //    if (listch != null)
+                    //    {
+                    //        c.ChildNodes = listch;
+                    //    }
+                    //}
                     return list;
                 }
                 else
@@ -40,16 +40,16 @@ namespace AchieveDAL
             }
 
         }
-        public override List<Sys_Items> GetList(string id = "")
+        public List<Sys_ModuleButton> GetList(string id = "")
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                List<Sys_Items> list = null;
-                var data = db.Queryable<Sys_Items>();
+                List<Sys_ModuleButton> list = null;
+                var data = db.Queryable<Sys_ModuleButton>();
                 list = data.ToList();
                 if (id != "" && id != null)
                 {
-                    list = data.Where(c => c.F_ParentId == id).ToList();
+                    list = data.Where(c => c.F_ModuleId == id).ToList();
                 }
                 if (list.Count > 0)
                 {
@@ -62,15 +62,15 @@ namespace AchieveDAL
             }
         }
         /// <summary>
-        /// id获取机构
+        /// id获取菜单
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Sys_Items GetForm(string id)
+        public Sys_ModuleButton GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                var data = db.Queryable<Sys_Items>().Where(c => c.F_Id == id).ToList();
+                var data = db.Queryable<Sys_ModuleButton>().Where(c => c.F_Id == id).ToList();
                 if (data.Count > 0)
                 {
                     return data[0];

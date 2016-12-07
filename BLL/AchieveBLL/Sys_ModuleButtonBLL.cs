@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace AchieveBLL
 {
-    public class Sys_ModuleBLL
+    public class Sys_ModuleButtonBLL
     {
-        ISys_ModuleDAL dal = DALFactory.GetModuleDAL();
+        ISys_ModuleButtonDAL dal = DALFactory.GetModuleButtonDAL();
 
         /// <summary>
         /// 获取菜单
         /// </summary>
-        public List<Sys_Module> GetAllModule()
+        public List<Sys_ModuleButton> GetAllModule()
         {
             return dal.GetAllModule();
         }
@@ -25,21 +25,12 @@ namespace AchieveBLL
         /// 获取所有菜单
         /// </summary>
         /// <returns></returns>
-        public List<Sys_Module> GetList()
+        public List<Sys_ModuleButton> GetList(string id="")
         {
-            return dal.GetList();
+            return dal.GetList(id);
         }
 
-        /// <summary>
-        /// 根据角色获取菜单
-        /// </summary>
-        /// <returns></returns>
-        public List<Sys_Module> GetMRoleList(string roleid)
-        {
-            return dal.GetMRoleList(roleid);
-        }
-
-        public Sys_Module GetForm(string id)
+        public Sys_ModuleButton GetForm(string id)
         {
             return dal.GetForm(id);
         }
@@ -48,7 +39,7 @@ namespace AchieveBLL
         /// 添加
         /// </summary>
         /// <returns></returns>
-        public int Add(Sys_Module obj, string[] disstr = null)
+        public int Add(Sys_ModuleButton obj, string[] disstr = null)
         {
             return dal.Add(obj, disstr);
         }
@@ -56,7 +47,7 @@ namespace AchieveBLL
         {
             return dal.Delete(idstr);
         }
-        public int Update(Sys_Module obj, string[] disablestr = null)
+        public int Update(Sys_ModuleButton obj, string[] disablestr = null)
         {
             return dal.Update(obj, disablestr);
         }

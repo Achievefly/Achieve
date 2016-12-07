@@ -53,6 +53,9 @@
     <Compile Include="Sys_DutyBLL.cs" />
     <Compile Include="Sys_ItemsDetailBLL.cs" />
     <Compile Include="Sys_ItemsBLL.cs" />
+    <Compile Include="Sys_RoleBLL.cs" />
+    <Compile Include="Sys_ModuleButtonBLL.cs" />
+    <Compile Include="Sys_RoleAuthorizeBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AchieveCommon\AchieveCommon.csproj">

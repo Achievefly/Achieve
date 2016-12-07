@@ -14,17 +14,17 @@ $.clientsInit = function () {
     };
     var init = function () {
         $.ajax({
-            url: "/Home/GetAllTreeByH",
+            url: "/ClientsData/GetClientsDataJson",
             data:{id:"0"},
-            type: "post",
+            type: "get",
             dataType: "json",
             async: false,
             success: function (data) {
-                //dataJson.dataItems = data.dataItems;
-                //dataJson.organize = data.organize;
-                //dataJson.role = data.role;
-                //dataJson.duty = data.duty;
-                dataJson.authorizeMenu = eval(data);
+                dataJson.dataItems = data.dataItems;
+                dataJson.organize = data.organize;
+                dataJson.role = data.role;
+                dataJson.duty = data.duty;
+                dataJson.authorizeMenu = data.authorizeMenu;
                 //dataJson.authorizeButton = data.authorizeButton;
             }
         });

@@ -7,35 +7,29 @@ using AchieveEntity;
 
 namespace AchieveInterfaceDAL
 {
-    public interface ISys_ModuleDAL
+    public interface ISys_ModuleButtonDAL
     {
         /// <summary>
         /// 获取所有菜单
         /// </summary>
         /// <returns></returns>
-        List<Sys_Module> GetAllModule();
+        List<Sys_ModuleButton> GetAllModule();
 
         /// <summary>
         /// 获取所有菜单
         /// </summary>
         /// <returns></returns>
-        List<Sys_Module> GetList(string id="");
-
-        /// <summary>
-        /// 获取所有菜单
-        /// </summary>
-        /// <returns></returns>
-        List<Sys_Module> GetMRoleList(string roleid);
+        List<Sys_ModuleButton> GetList(string id = "");
         /// <summary>
         /// 获取对象
         /// </summary>
         /// <returns></returns>
-        Sys_Module GetForm(string id);
+        Sys_ModuleButton GetForm(string id);
 
-        int Add(Sys_Module obj, string[] disstr);
+        int Add(Sys_ModuleButton obj, string[] disstr);
 
         int Delete(string idstr);
 
-        int Update(Sys_Module obj, string[] disablestr = null);
+        int Update(Sys_ModuleButton obj, string[] disablestr = null);
     }
 }

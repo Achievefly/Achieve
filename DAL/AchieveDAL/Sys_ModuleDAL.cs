@@ -40,7 +40,7 @@ namespace AchieveDAL
             }
 
         }
-        public List<Sys_Module> GetList(string id="")
+        public override List<Sys_Module> GetList(string id="")
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -66,7 +66,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override Sys_Module GetForm(string id)
+        public Sys_Module GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -74,6 +74,36 @@ namespace AchieveDAL
                 if (data.Count > 0)
                 {
                     return data[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 角色获取菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Sys_Module> GetMRoleList(string id)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                var data = db.SqlQuery<Sys_Module>("select * from Sys_Module where F_Id in (select F_ItemId from [Sys_RoleAuthorize]   WHERE [F_ObjectId]  ='" + id + "')");
+                List<Sys_Module> list = data.Where(c => c.F_ParentId == "0").ToList();
+                if (list.Count > 0)
+                {
+                    foreach (var c in list)
+                    {
+                        List<Sys_Module> listch = data.Where(a=>a.F_ParentId==c.F_Id).ToList();
+                        if (listch != null)
+                        {
+                            c.ChildNodes = listch;
+                        }
+                    }
+                    return list;
                 }
                 else
                 {

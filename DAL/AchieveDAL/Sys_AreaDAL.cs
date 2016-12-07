@@ -66,7 +66,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override Sys_Area GetForm(string id)
+        public Sys_Area GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {

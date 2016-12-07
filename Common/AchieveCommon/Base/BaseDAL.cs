@@ -45,7 +45,7 @@ namespace AchieveCommon.Base
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                int i = db.Delete<T>("F_Id=@F_Id", new {F_id=id }).ObjToInt();
+                int i = db.Delete<T>("F_Id=@F_Id", new {F_Id=id }).ObjToInt();
                 return i;
             }
         }
@@ -86,7 +86,7 @@ namespace AchieveCommon.Base
                 }
             }
         }
-        public virtual T GetForm(string table,string idstr, string idvalue)
+        public virtual T GetForm(string table, string idstr, string idvalue)
         {
             using (var db = SqlSugarDao.GetInstance())
             {

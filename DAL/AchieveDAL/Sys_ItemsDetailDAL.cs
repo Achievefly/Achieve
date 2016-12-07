@@ -18,7 +18,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override List<Sys_ItemsDetail> GetList(string id = "",string keyvalue="")
+        public List<Sys_ItemsDetail> GetList(string id = "",string keyvalue="")
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -48,7 +48,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override Sys_ItemsDetail GetForm(string id)
+        public Sys_ItemsDetail GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -73,7 +73,9 @@ namespace AchieveDAL
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                var data = db.Queryable<Sys_ItemsDetail>().Where(c => c.F_ItemCode == encode).ToList();
+                var data = db.Queryable<Sys_ItemsDetail>().
+                    JoinTable<Sys_Items>((s1, s2) => s1.F_ItemId == s2.F_Id).
+                    Where("s2.F_EnCode = '" + encode + "'").Select("s1.*").ToList();
                 if (data.Count > 0)
                 {
                     return data;

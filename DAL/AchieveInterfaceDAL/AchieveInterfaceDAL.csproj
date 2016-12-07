@@ -50,6 +50,9 @@
     <Compile Include="ISys_DutyDAL.cs" />
     <Compile Include="ISys_ItemsDetailDAL.cs" />
     <Compile Include="ISys_ItemsDAL.cs" />
+    <Compile Include="ISys_RoleDAL.cs" />
+    <Compile Include="ISys_ModuleButtonDAL.cs" />
+    <Compile Include="ISys_RoleAuthorizeDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AchieveCommon\AchieveCommon.csproj">

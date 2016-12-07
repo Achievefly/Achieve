@@ -45,6 +45,12 @@ namespace AchieveDALFactory
             return dal;
         }
 
+        public static ISys_ModuleButtonDAL GetModuleButtonDAL()
+        {
+            ISys_ModuleButtonDAL dal = GetInstance("Sys_ModuleButtonDAL") as ISys_ModuleButtonDAL;
+            return dal;
+        }
+
         public static ISys_OrganizeDAL GetOrganizeDAL()
         {
             ISys_OrganizeDAL dal = GetInstance("Sys_OrganizeDAL") as ISys_OrganizeDAL;
@@ -72,6 +78,18 @@ namespace AchieveDALFactory
         public static ISys_ItemsDAL GetItemsDAL()
         {
             ISys_ItemsDAL dal = GetInstance("Sys_ItemsDAL") as ISys_ItemsDAL;
+            return dal;
+        }
+
+        public static ISys_RoleDAL GetRoleDAL()
+        {
+            ISys_RoleDAL dal = GetInstance("Sys_RoleDAL") as ISys_RoleDAL;
+            return dal;
+        }
+
+        public static ISys_RoleAuthorizeDAL GetRoleAuthorizeDAL()
+        {
+            ISys_RoleAuthorizeDAL dal = GetInstance("Sys_RoleAuthorizeDAL") as ISys_RoleAuthorizeDAL;
             return dal;
         }
     }

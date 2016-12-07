@@ -16,7 +16,7 @@ namespace AchieveDAL
         /// <summary>
         /// 获取所有机构
         /// </summary>
-        public override List<Sys_Role> GetList()
+        public List<Sys_Role> GetList()
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -37,7 +37,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override Sys_Role GetForm(string id)
+        public Sys_Role GetForm(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {

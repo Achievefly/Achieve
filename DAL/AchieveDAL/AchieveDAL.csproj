@@ -54,6 +54,9 @@
     <Compile Include="Sys_DutyDAL.cs" />
     <Compile Include="Sys_ItemsDetailDAL.cs" />
     <Compile Include="Sys_ItemsDAL.cs" />
+    <Compile Include="Sys_RoleDAL.cs" />
+    <Compile Include="Sys_ModuleButtonDAL.cs" />
+    <Compile Include="Sys_RoleAuthorizeDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Entity\AchieveEntity\AchieveEntity.csproj">
