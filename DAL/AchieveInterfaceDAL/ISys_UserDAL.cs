@@ -43,13 +43,13 @@ namespace AchieveInterfaceDAL
         /// <param name="id"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        int RevisePassword(string id,string password);
+        bool RevisePassword(string id,string password);
 
-        int Add(Sys_User obj,string [] disstr);
+        bool Add(Sys_User obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_User obj, string[] disablestr = null);
+        bool Update(Sys_User obj, string[] disablestr = null);
 
 
     }

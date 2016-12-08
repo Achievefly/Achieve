@@ -69,32 +69,64 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_Area areaEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                areaEntity.F_CreatorUserId = uInfo.F_Account;
-                areaEntity.F_CreatorTime = DateTime.Now;
-                areaEntity.F_Id = System.Guid.NewGuid().ToString();
-                string[] notstr = { "ChildNodes" };
-                areaApp.Add(areaEntity, notstr);
+                bool i =false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    areaEntity.F_CreatorUserId = uInfo.F_Account;
+                    areaEntity.F_CreatorTime = DateTime.Now;
+                    areaEntity.F_Id = System.Guid.NewGuid().ToString();
+                    string[] notstr = { "ChildNodes" };
+                    i = areaApp.Add(areaEntity, notstr);
+                }
+                else
+                {
+                    areaEntity.F_Id = keyValue;
+                    areaEntity.F_LastModifyUserId = uInfo.F_Account;
+                    areaEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
+                    i = areaApp.Update(areaEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success("操作成功。");
+                }
+                else
+                {
+                    return Warning("操作失败。");
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                areaEntity.F_Id = keyValue;
-                areaEntity.F_LastModifyUserId = uInfo.F_Account;
-                areaEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
-                areaApp.Update(areaEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            areaApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = areaApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("操作成功。");
+                }
+                else
+                {
+                    return Warning("操作失败。");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [NonAction]
         public List<Sys_Area> Seach(List<Sys_Area> list, string keyValue)

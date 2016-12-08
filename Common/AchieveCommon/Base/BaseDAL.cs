@@ -9,7 +9,7 @@ namespace AchieveCommon.Base
 {
     public abstract class BaseDAL<T> where T: class
     {
-        public virtual int Add(T obj,string[] disstr = null)
+        public virtual bool Add(T obj,string[] disstr = null)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -17,11 +17,11 @@ namespace AchieveCommon.Base
                 {
                     db.DisableInsertColumns = disstr;
                 }
-                int add = db.Insert<T>(obj).ObjToInt();
+                bool add = db.Insert<T>(obj).ObjToBool();
                 return add;
             }
         }
-        public virtual int Add(List<T> obj, string[] disstr = null)
+        public virtual bool Add(List<T> obj, string[] disstr = null)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -29,27 +29,27 @@ namespace AchieveCommon.Base
                 {
                     db.DisableInsertColumns = disstr;
                 }
-                int add = db.InsertRange(obj).ObjToInt();
+                bool add = db.InsertRange(obj).ObjToBool();
                 return add;
             }
         }
-        public virtual int Delete(string[] idstr)
+        public virtual bool Delete(string[] idstr)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                int i = db.Delete<T, string>(idstr).ObjToInt();
+                bool i = db.Delete<T, string>(idstr).ObjToBool();
                 return i;
             }
         }
-        public virtual int Delete(string id)
+        public virtual bool Delete(string id)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                int i = db.Delete<T>("F_Id=@F_Id", new {F_Id=id }).ObjToInt();
+                bool i = db.Delete<T>("F_Id=@F_Id", new { F_Id = id }).ObjToBool();
                 return i;
             }
         }
-        public virtual int Update(T obj, string[] disablestr=null)
+        public virtual bool Update(T obj, string[] disablestr = null)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
@@ -57,7 +57,7 @@ namespace AchieveCommon.Base
                 {
                     db.AddDisableUpdateColumns(disablestr);//添加禁止更新列
                 }
-                int i = db.Update<T>(obj).ObjToInt();
+                bool i = db.Update<T>(obj).ObjToBool();
                 return i;
             }
         }

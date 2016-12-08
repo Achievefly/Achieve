@@ -115,11 +115,11 @@ namespace AchieveDAL
             }
         }
 
-        public int RevisePassword(string id, string password)
+        public bool RevisePassword(string id, string password)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                return db.Update<Sys_User>(new { F_Password = password }, c => c.F_Id == id).ObjToInt();
+                return db.Update<Sys_User>(new { F_Password = password }, c => c.F_Id == id).ObjToBool();
             }
         }
 

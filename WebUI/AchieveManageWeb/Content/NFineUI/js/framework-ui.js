@@ -102,8 +102,44 @@ $.modalOpen = function (options) {
         content: options.url,
         btn: options.btn,
         btnclass: options.btnclass,
-        yes: function () {
-            options.callBack(options.id)
+        yes: function (index, layero) {
+            options.callBack(options.id,index)
+        }, cancel: function () {
+            return true;
+        }
+    });
+}
+$.modalOpenEdit = function (options) {
+    var defaults = {
+        id: null,
+        title: '系统窗口',
+        width: "100px",
+        height: "100px",
+        url: '',
+        shade: 0.3,
+        btn: ['确认', '关闭'],
+        btnclass: ['btn btn-primary', 'btn btn-danger'],
+        callBack: null,
+        LoadForm:null
+    };
+    var options = $.extend(defaults, options);
+    var _width = top.$(window).width() > parseInt(options.width.replace('px', '')) ? options.width : top.$(window).width() + 'px';
+    var _height = top.$(window).height() > parseInt(options.height.replace('px', '')) ? options.height : top.$(window).height() + 'px';
+    top.layer.open({
+        id: options.id,
+        type: 2,
+        shade: options.shade,
+        title: options.title,
+        fix: false,
+        area: [_width, _height],
+        content: options.url,
+        btn: options.btn,
+        btnclass: options.btnclass,
+        success: function (layero, index) {
+            options.LoadForm(options.id,index);
+        },
+        yes: function (index,layero) {
+            options.callBack(options.id,index)
         }, cancel: function () {
             return true;
         }
@@ -121,7 +157,7 @@ $.modalConfirm = function (content, callBack) {
         callBack(false)
     });
 }
-$.modalAlert = function (content, type) {
+$.modalAlert = function (content, typmodalOpene) {
     var icon = "";
     if (type == 'success') {
         icon = "fa-check-circle";
@@ -157,8 +193,10 @@ $.modalMsg = function (content, type) {
         top.layer.msg(content);
     }
 }
-$.modalClose = function () {
-    var index = top.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+$.modalClose = function (index) {
+    if (index == "" || index == undefined) {
+        index = top.layer.getFrameIndex(window.name); //没有传递就直接取当前iframe层的索引
+    }
     var $IsdialogClose = top.$("#layui-layer" + index).find('.layui-layer-btn').find("#IsdialogClose");
     var IsClose = $IsdialogClose.is(":checked");
     if ($IsdialogClose.length == 0) {
@@ -172,6 +210,7 @@ $.modalClose = function () {
 }
 $.submitForm = function (options) {
     var defaults = {
+        index:"",
         url: "",
         param: [],
         loading: "正在提交数据...",
@@ -194,7 +233,7 @@ $.submitForm = function (options) {
                     options.success(data);
                     $.modalMsg(data.message, data.state);
                     if (options.close == true) {
-                        $.modalClose();
+                        $.modalClose(options.index);
                     }
                 } else {
                     $.modalAlert(data.message, data.state);

@@ -37,32 +37,64 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_Role roleEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                roleEntity.F_CreatorUserId = uInfo.F_Account;
-                roleEntity.F_CreatorTime = DateTime.Now;
-                roleEntity.F_Category = 2;
-                roleEntity.F_Id = System.Guid.NewGuid().ToString();
-                dutyApp.Add(roleEntity);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    roleEntity.F_CreatorUserId = uInfo.F_Account;
+                    roleEntity.F_CreatorTime = DateTime.Now;
+                    roleEntity.F_Category = 2;
+                    roleEntity.F_Id = System.Guid.NewGuid().ToString();
+                    i = dutyApp.Add(roleEntity);
+                }
+                else
+                {
+                    roleEntity.F_Id = keyValue;
+                    roleEntity.F_LastModifyUserId = uInfo.F_Account;
+                    roleEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_Category" };
+                    i = dutyApp.Update(roleEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                roleEntity.F_Id = keyValue;
-                roleEntity.F_LastModifyUserId = uInfo.F_Account;
-                roleEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_Category" };
-                dutyApp.Update(roleEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            dutyApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = dutyApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
     }
 }

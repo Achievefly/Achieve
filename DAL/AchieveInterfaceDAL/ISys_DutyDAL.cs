@@ -20,10 +20,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_Role GetForm(string id);
 
-        int Add(Sys_Role obj, string[] disstr);
+        bool Add(Sys_Role obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_Role obj, string[] disablestr = null);
+        bool Update(Sys_Role obj, string[] disablestr = null);
     }
 }

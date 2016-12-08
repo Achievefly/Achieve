@@ -13,6 +13,11 @@ namespace AchieveDAL
 {
     public class Sys_RoleAuthorizeDAL : BaseDAL<Sys_RoleAuthorize>, ISys_RoleAuthorizeDAL
     {
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public override List<Sys_RoleAuthorize> GetList(string id = "")
         {
             using (var db = SqlSugarDao.GetInstance())

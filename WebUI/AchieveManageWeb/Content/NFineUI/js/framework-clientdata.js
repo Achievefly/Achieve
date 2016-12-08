@@ -25,7 +25,7 @@ $.clientsInit = function () {
                 dataJson.role = data.role;
                 dataJson.duty = data.duty;
                 dataJson.authorizeMenu = data.authorizeMenu;
-                //dataJson.authorizeButton = data.authorizeButton;
+                dataJson.authorizeButton = data.authorizeButton;
             }
         });
     }

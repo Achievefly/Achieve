@@ -26,10 +26,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_Organize GetForm(string id);
 
-        int Add(Sys_Organize obj, string[] disstr);
+        bool Add(Sys_Organize obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_Organize obj, string[] disablestr = null);
+        bool Update(Sys_Organize obj, string[] disablestr = null);
     }
 }

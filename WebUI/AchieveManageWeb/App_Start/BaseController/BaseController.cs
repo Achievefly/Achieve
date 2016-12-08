@@ -41,8 +41,12 @@ namespace AchieveManageWeb.App_Start.BaseController
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        protected virtual ActionResult Success(string message)
+        protected virtual ActionResult Success(string message="")
         {
+            if (message == "" || message == null)
+            {
+                message = "操作成功。";
+            }
             return Json(new AjaxResult { state = ResultType.success.ToString(), message = message });
         }
         /// <summary>
@@ -78,8 +82,12 @@ namespace AchieveManageWeb.App_Start.BaseController
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        protected virtual ActionResult Warning(string message)
+        protected virtual ActionResult Warning(string message="")
         {
+            if (message == "" || message == null)
+            {
+                message = "操作失败。";
+            }
             return Json(new AjaxResult { state = ResultType.warning.ToString(), message = message });
         }
     }

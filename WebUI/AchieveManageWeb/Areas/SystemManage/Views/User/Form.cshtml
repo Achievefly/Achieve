@@ -3,22 +3,9 @@
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 <script>
-    var keyValue = $.request("keyValue");
     $(function () {
         initControl();
-        if (!!keyValue) {
-            $.ajax({
-                url: "/SystemManage/User/GetFormJson",
-                data: { keyValue: keyValue },
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    $("#form1").formSerialize(data);
-                    $("#F_Password").val("******").attr('disabled', 'disabled');
-                }
-            });
-        }
-    });
+    })
     function initControl() {
         $("#F_Gender").bindSelect()
         $("#F_IsAdministrator").bindSelect()
@@ -40,17 +27,9 @@
             text: "F_FullName"
         });
     }
-    function submitForm() {
-        if (!$('#form1').formValid()) {
-            return false;
-        }
-        $.submitForm({
-            url: "/SystemManage/User/SubmitForm?keyValue=" + keyValue,
-            param: $("#form1").formSerialize(),
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
+    function LoadForm(data) {
+        initControl();
+        $("#form1").formSerialize(data);
     }
 </script>
 <form id="form1">

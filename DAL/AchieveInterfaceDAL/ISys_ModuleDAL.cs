@@ -32,10 +32,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_Module GetForm(string id);
 
-        int Add(Sys_Module obj, string[] disstr);
+        bool Add(Sys_Module obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_Module obj, string[] disablestr = null);
+        bool Update(Sys_Module obj, string[] disablestr = null);
     }
 }

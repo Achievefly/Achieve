@@ -62,7 +62,7 @@ namespace AchieveDAL
             }
         }
         /// <summary>
-        /// id获取菜单
+        /// id获取菜单按钮
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -79,6 +79,19 @@ namespace AchieveDAL
                 {
                     return null;
                 }
+            }
+        }
+        /// <summary>
+        /// 根据角色获取按钮
+        /// </summary>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        public List<Sys_ModuleButton> GetButtonList(string roleid)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                var data = db.SqlQuery<Sys_ModuleButton>("select * from Sys_ModuleButton where F_Id in (select F_ItemId from [Sys_RoleAuthorize]   WHERE [F_ObjectId]  ='" + roleid + "')").ToList();
+                return data;
             }
         }
     }

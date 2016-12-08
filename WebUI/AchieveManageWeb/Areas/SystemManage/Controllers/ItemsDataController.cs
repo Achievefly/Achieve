@@ -45,31 +45,63 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_ItemsDetail itemsDetailEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                itemsDetailEntity.F_CreatorUserId = uInfo.F_Account;
-                itemsDetailEntity.F_CreatorTime = DateTime.Now;
-                itemsDetailEntity.F_Id = System.Guid.NewGuid().ToString();
-                itemsDetailApp.Add(itemsDetailEntity);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    itemsDetailEntity.F_CreatorUserId = uInfo.F_Account;
+                    itemsDetailEntity.F_CreatorTime = DateTime.Now;
+                    itemsDetailEntity.F_Id = System.Guid.NewGuid().ToString();
+                    i = itemsDetailApp.Add(itemsDetailEntity);
+                }
+                else
+                {
+                    itemsDetailEntity.F_Id = keyValue;
+                    itemsDetailEntity.F_LastModifyUserId = uInfo.F_Account;
+                    itemsDetailEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_ParentId", "F_ItemId" };
+                    i = itemsDetailApp.Update(itemsDetailEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                itemsDetailEntity.F_Id = keyValue;
-                itemsDetailEntity.F_LastModifyUserId = uInfo.F_Account;
-                itemsDetailEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_ParentId", "F_ItemId" };
-                itemsDetailApp.Update(itemsDetailEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            itemsDetailApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = itemsDetailApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功。");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
     }
 }

@@ -27,10 +27,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         List<Sys_ItemsDetail> GetItemList(string encode);
 
-        int Add(Sys_ItemsDetail obj, string[] disstr);
+        bool Add(Sys_ItemsDetail obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_ItemsDetail obj, string[] disablestr = null);
+        bool Update(Sys_ItemsDetail obj, string[] disablestr = null);
     }
 }

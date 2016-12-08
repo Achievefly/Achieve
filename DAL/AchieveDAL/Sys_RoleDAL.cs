@@ -35,11 +35,11 @@ namespace AchieveDAL
             }
         }
 
-        public int Add(Sys_Role obj, List<Sys_RoleAuthorize> list,bool isadd)
+        public bool Add(Sys_Role obj, List<Sys_RoleAuthorize> list,bool isadd)
         {
             using (SqlSugarClient db = SqlSugarDao.GetInstance())//开启数据库连接
             {
-                int i=1;
+                bool i = false;
                 db.CommandTimeOut = 30000;//设置超时时间
                 try
                 {
@@ -56,13 +56,13 @@ namespace AchieveDAL
                         db.Insert(obj);
                     }
                     db.InsertRange(list);
-
+                    i = true;
                     db.CommitTran();//提交事务
                 }
                 catch (Exception ex)
                 {
                     db.RollbackTran();//回滚事务
-                    i = 0;
+                    i = false;
                 }
                 return i;
             }

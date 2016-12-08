@@ -68,6 +68,7 @@ namespace AchieveManageWeb.Controllers
             CookiesHelper.AddCookie("UserID", System.DateTime.Now.AddDays(-1));
             Session.Abandon();
             Session.Clear();
+            ViewData["Account"] = null;
             return RedirectToAction("Index", "Login");
         }
     }

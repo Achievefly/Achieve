@@ -26,10 +26,12 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_ModuleButton GetForm(string id);
 
-        int Add(Sys_ModuleButton obj, string[] disstr);
+        bool Add(Sys_ModuleButton obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_ModuleButton obj, string[] disablestr = null);
+        bool Update(Sys_ModuleButton obj, string[] disablestr = null);
+
+        List<Sys_ModuleButton> GetButtonList(string roleid);
     }
 }

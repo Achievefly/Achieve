@@ -32,7 +32,7 @@ namespace AchieveBLL
         /// 添加
         /// </summary>
         /// <returns></returns>
-        public int Add(Sys_Role obj, string[] disstr,bool isadd=true)
+        public bool Add(Sys_Role obj, string[] disstr, bool isadd = true)
         {
             List<Sys_RoleAuthorize> list = new List<Sys_RoleAuthorize>();
             var module = new Sys_ModuleBLL().GetList();
@@ -58,7 +58,7 @@ namespace AchieveBLL
             }
             return dal.Add(obj, list, isadd);
         }
-        public int Delete(string idstr)
+        public bool Delete(string idstr)
         {
             return dal.Delete(idstr);
         }

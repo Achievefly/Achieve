@@ -70,51 +70,7 @@
             }).trigger('reloadGrid');
         });
     }
-    function btn_add() {
-        $.modalOpen({
-            id: "Form",
-            title: "新增用户",
-            url: "/SystemManage/User/Form",
-            width: "700px",
-            height: "510px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改用户",
-            url: "/SystemManage/User/Form?keyValue=" + keyValue,
-            width: "700px",
-            height: "510px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_delete() {
-        $.deleteForm({
-            url: "/SystemManage/User/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
-    function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Details",
-            title: "查看用户",
-            url: "/SystemManage/User/Details?keyValue=" + keyValue,
-            width: "700px",
-            height: "550px",
-            btn: null,
-        });
-    }
+    
     function btn_revisepassword() {
         var keyValue = $("#gridList").jqGridRowValue().F_Id;
         var Account = $("#gridList").jqGridRowValue().F_Account;
@@ -130,34 +86,6 @@
             }
         });
     }
-    function btn_disabled() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalConfirm("注：您确定要【禁用】该项账户吗？", function (r) {
-            if (r) {
-                $.submitForm({
-                    url: "/SystemManage/User/DisabledAccount",
-                    param: { keyValue: keyValue },
-                    success: function () {
-                        $.currentWindow().$("#gridList").trigger("reloadGrid");
-                    }
-                })
-            }
-        });
-    }
-    function btn_enabled() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalConfirm("注：您确定要【启用】该项账户吗？", function (r) {
-            if (r) {
-                $.submitForm({
-                    url: "/SystemManage/User/EnabledAccount",
-                    param: { keyValue: keyValue },
-                    success: function () {
-                        $.currentWindow().$("#gridList").trigger("reloadGrid");
-                    }
-                })
-            }
-        });
-    }
 </script>
 
 <div class="topPanel">
@@ -166,23 +94,23 @@
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
         <div class="btn-group">
-            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建用户</a>
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add('gridList','Form','新建用户','/SystemManage/User/Form','/SystemManage/User/SubmitForm','700','510')"><i class="fa fa-plus"></i>新建用户</a>
         </div>
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改用户</a></li>
-                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除用户</a></li>
-                <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看用户</a></li>
+                <li><a id="NF-edit" authorize="yes" onclick="btn_edit('gridList','Form','修改用户','/SystemManage/User/Form','/SystemManage/User/GetFormJson','/SystemManage/User/SubmitForm','700','510')"><i class="fa fa-pencil-square-o"></i>修改用户</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_delete('gridList','/SystemManage/User/DeleteForm')"><i class="fa fa-trash-o"></i>删除用户</a></li>
+                <li><a id="NF-Details" authorize="yes" onclick="btn_details('gridList','Form','查看用户','/SystemManage/User/Details','/SystemManage/User/GetFormJson','700','550')"><i class="fa fa-search-plus"></i>查看用户</a></li>
                 <li class="split"></li>
                 <li><a id="NF-revisepassword" authorize="yes" onclick="btn_revisepassword()"><i class="fa fa-key"></i>密码重置</a></li>
                 <li class="split"></li>
-                <li><a id="NF-disabled" authorize="yes" onclick="btn_disabled()"><i class="fa fa-stop-circle"></i>禁用</a></li>
-                <li><a id="NF-enabled" authorize="yes" onclick="btn_enabled()"><i class="fa fa-play-circle"></i>启用</a></li>
+                <li><a id="NF-disabled" authorize="yes" onclick="btn_confirm('gridList','/SystemManage/User/DisabledAccount','注：您确定要【禁用】该项账户吗？')"><i class="fa fa-stop-circle"></i>禁用</a></li>
+                <li><a id="NF-enabled" authorize="yes" onclick="btn_confirm('gridList','/SystemManage/User/EnabledAccount','注：您确定要【启用】该项账户吗？')"><i class="fa fa-play-circle"></i>启用</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>
-       @* <script>$('.toolbar').authorizeButton()</script>*@
+        <script>$('.toolbar').authorizeButton()</script>
     </div>
     <div class="search">
         <table>

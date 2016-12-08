@@ -41,15 +41,15 @@ namespace AchieveBLL
         /// 添加
         /// </summary>
         /// <returns></returns>
-        public int Add(Sys_ItemsDetail obj, string[] disstr = null)
+        public bool Add(Sys_ItemsDetail obj, string[] disstr = null)
         {
             return dal.Add(obj, disstr);
         }
-        public int Delete(string idstr)
+        public bool Delete(string idstr)
         {
             return dal.Delete(idstr);
         }
-        public int Update(Sys_ItemsDetail obj, string[] disablestr = null)
+        public bool Update(Sys_ItemsDetail obj, string[] disablestr = null)
         {
             return dal.Update(obj, disablestr);
         }

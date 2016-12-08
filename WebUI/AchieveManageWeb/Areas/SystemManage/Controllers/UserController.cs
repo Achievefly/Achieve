@@ -41,31 +41,63 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_User userEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                userEntity.F_CreatorUserId = uInfo.F_Account;
-                userEntity.F_CreatorTime = DateTime.Now;
-                userEntity.F_Id = System.Guid.NewGuid().ToString();
-                userApp.Add(userEntity);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    userEntity.F_CreatorUserId = uInfo.F_Account;
+                    userEntity.F_CreatorTime = DateTime.Now;
+                    userEntity.F_Id = System.Guid.NewGuid().ToString();
+                    i = userApp.Add(userEntity);
+                }
+                else
+                {
+                    userEntity.F_Id = keyValue;
+                    userEntity.F_LastModifyUserId = uInfo.F_Account;
+                    userEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "F_Password", "F_HeadIcon", "F_SecurityLevel", "F_Signature", "F_CreatorUserId", "F_CreatorTime" };
+                    i = userApp.Update(userEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                userEntity.F_Id = keyValue;
-                userEntity.F_LastModifyUserId = uInfo.F_Account;
-                userEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "F_Password", "F_HeadIcon", "F_SecurityLevel", "F_Signature", "F_CreatorUserId", "F_CreatorTime" };
-                userApp.Update(userEntity,notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            userApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = userApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [HttpGet]
         public ActionResult RevisePassword()
@@ -77,24 +109,73 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRevisePassword(string userPassword, string keyValue)
         {
-            userApp.RevisePassword(userPassword, keyValue);
-            return Success("重置密码成功。");
+            try
+            {
+                bool i = false;
+                i = userApp.RevisePassword(userPassword, keyValue);
+                if (i)
+                {
+                    return Success("重置密码成功。");
+                }
+                else
+                {
+                    return Warning("重置密码失败。");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DisabledAccount(string keyValue)
         {
-            userApp.Startusing(keyValue, 0);
-            return Success("账户禁用成功。");
+            try
+            {
+                bool i = false;
+                i = userApp.Startusing(keyValue, 0);
+                if (i)
+                {
+                    return Success("账户禁用成功。");
+                }
+                else
+                {
+                    return Warning("账户禁用失败。");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult EnabledAccount(string keyValue)
         {
-            userApp.Startusing(keyValue,1);
-            return Success("账户启用成功。");
+            try
+            {
+                bool i = false;
+                i = userApp.Startusing(keyValue, 1);
+                if (i)
+                {
+                    return Success("账户启用成功。");
+                }
+                else
+                {
+                    return Warning("账户启用失败。");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
+
         }
 
         [HttpGet]

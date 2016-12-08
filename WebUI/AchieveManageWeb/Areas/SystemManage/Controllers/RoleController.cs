@@ -34,32 +34,63 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_Role roleEntity, string permissionIds, string keyValue)
         {
-            //roleApp.SubmitForm(roleEntity, permissionIds.Split(','), keyValue);
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                roleEntity.F_CreatorUserId = uInfo.F_Account;
-                roleEntity.F_CreatorTime = DateTime.Now;
-                roleEntity.F_Category = 1;
-                roleEntity.F_Id = System.Guid.NewGuid().ToString();
-                roleApp.Add(roleEntity, permissionIds.Split(','));
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    roleEntity.F_CreatorUserId = uInfo.F_Account;
+                    roleEntity.F_CreatorTime = DateTime.Now;
+                    roleEntity.F_Category = 1;
+                    roleEntity.F_Id = System.Guid.NewGuid().ToString();
+                    i = roleApp.Add(roleEntity, permissionIds.Split(','));
+                }
+                else
+                {
+                    roleEntity.F_Id = keyValue;
+                    roleEntity.F_LastModifyUserId = uInfo.F_Account;
+                    roleEntity.F_LastModifyTime = DateTime.Now;
+                    i = roleApp.Add(roleEntity, permissionIds.Split(','), false);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                roleEntity.F_Id = keyValue;
-                roleEntity.F_LastModifyUserId = uInfo.F_Account;
-                roleEntity.F_LastModifyTime = DateTime.Now;
-                roleApp.Add(roleEntity, permissionIds.Split(','),false);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            roleApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = roleApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功。");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
     }
 }

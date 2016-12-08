@@ -21,8 +21,8 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_Role GetForm(string table, string id);
 
-        int Add(Sys_Role obj, List<Sys_RoleAuthorize> disstr,bool isadd);
+        bool Add(Sys_Role obj, List<Sys_RoleAuthorize> disstr, bool isadd);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
     }
 }

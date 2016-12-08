@@ -36,7 +36,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson(string moduleId,string keyvalue)
+        public ActionResult GetTreeGridJson(string moduleId, string keyvalue)
         {
             var data = moduleButtonApp.GetList(moduleId);
             var treeList = new List<TreeGridModel>();
@@ -66,33 +66,63 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_ModuleButton moduleButtonEntity, string keyValue)
         {
-            //moduleButtonApp.SubmitForm(moduleButtonEntity, keyValue);
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                moduleButtonEntity.F_CreatorUserId = uInfo.F_Account;
-                moduleButtonEntity.F_CreatorTime = DateTime.Now;
-                moduleButtonEntity.F_Id = System.Guid.NewGuid().ToString();
-                //string[] notstr = { "ChildNodes" };
-                moduleButtonApp.Add(moduleButtonEntity);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    moduleButtonEntity.F_CreatorUserId = uInfo.F_Account;
+                    moduleButtonEntity.F_CreatorTime = DateTime.Now;
+                    moduleButtonEntity.F_Id = System.Guid.NewGuid().ToString();
+                    i = moduleButtonApp.Add(moduleButtonEntity);
+                }
+                else
+                {
+                    moduleButtonEntity.F_Id = keyValue;
+                    moduleButtonEntity.F_LastModifyUserId = uInfo.F_Account;
+                    moduleButtonEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "F_CreatorUserId", "F_CreatorTime" };
+                    i = moduleButtonApp.Update(moduleButtonEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                moduleButtonEntity.F_Id = keyValue;
-                moduleButtonEntity.F_LastModifyUserId = uInfo.F_Account;
-                moduleButtonEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = {"F_CreatorUserId", "F_CreatorTime" };
-                moduleButtonApp.Update(moduleButtonEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            moduleButtonApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = moduleButtonApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [HttpGet]
         public ActionResult CloneButton()

@@ -36,41 +36,6 @@
             }).trigger('reloadGrid');
         });
     }
-    function btn_add() {
-        $.modalOpen({
-            id: "Form",
-            title: "新增区域",
-            url: "/SystemManage/Area/Form",
-            width: "450px",
-            height: "340px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改区域",
-            url: "/SystemManage/Area/Form?keyValue=" + keyValue,
-            width: "450px",
-            height: "340px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_delete() {
-        $.deleteForm({
-            url: "/SystemManage/Area/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").resetSelection();
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
 </script>
 
 <div class="topPanel">
@@ -93,17 +58,17 @@
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
         <div class="btn-group">
-            <a id="NF-add" authorize="yes" class="btn btn-primary" onclick="btn_add()"><i class="fa fa-plus"></i>新建区域</a>
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add('gridList','Form','新建区域','/SystemManage/Area/Form','/SystemManage/Area/SubmitForm','450','340')"><i class="fa fa-plus"></i>新建区域</a>
         </div>
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改区域</a></li>
-                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除区域</a></li>
+                <li><a id="NF-edit" authorize="yes" onclick="btn_edit('gridList','Form','修改区域','/SystemManage/Area/Form','/SystemManage/Area/GetFormJson','/SystemManage/Area/SubmitForm','450','340')"><i class="fa fa-pencil-square-o"></i>修改区域</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_delete('gridList','/SystemManage/Area/DeleteForm')"><i class="fa fa-trash-o"></i>删除区域</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>
-        @*<script>$('.toolbar').authorizeButton()</script>*@
+        <script>$('.toolbar').authorizeButton()</script>
     </div>
 </div>
 <div class="gridPanel">

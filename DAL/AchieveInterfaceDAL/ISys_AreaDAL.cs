@@ -26,10 +26,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_Area GetForm(string id);
 
-        int Add(Sys_Area obj, string[] disstr);
+        bool Add(Sys_Area obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_Area obj, string[] disablestr = null);
+        bool Update(Sys_Area obj, string[] disablestr = null);
     }
 }

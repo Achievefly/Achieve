@@ -21,10 +21,10 @@ namespace AchieveInterfaceDAL
         /// <returns></returns>
         Sys_RoleAuthorize GetForm(string table, string id);
 
-        int Add(Sys_RoleAuthorize obj, string[] disstr);
+        bool Add(Sys_RoleAuthorize obj, string[] disstr);
 
-        int Delete(string idstr);
+        bool Delete(string idstr);
 
-        int Update(Sys_RoleAuthorize obj, string[] disablestr = null);
+        bool Update(Sys_RoleAuthorize obj, string[] disablestr = null);
     }
 }

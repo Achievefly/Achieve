@@ -39,17 +39,22 @@ namespace AchieveBLL
         /// 添加
         /// </summary>
         /// <returns></returns>
-        public int Add(Sys_ModuleButton obj, string[] disstr = null)
+        public bool Add(Sys_ModuleButton obj, string[] disstr = null)
         {
             return dal.Add(obj, disstr);
         }
-        public int Delete(string idstr)
+        public bool Delete(string idstr)
         {
             return dal.Delete(idstr);
         }
-        public int Update(Sys_ModuleButton obj, string[] disablestr = null)
+        public bool Update(Sys_ModuleButton obj, string[] disablestr = null)
         {
             return dal.Update(obj, disablestr);
+        }
+
+        public List<Sys_ModuleButton> GetButtonList(string roleid)
+        {
+            return dal.GetButtonList(roleid);
         }
     }
 }

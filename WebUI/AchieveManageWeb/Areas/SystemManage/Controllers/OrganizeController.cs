@@ -92,38 +92,70 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_Organize organizeEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                organizeEntity.F_CreatorUserId = uInfo.F_Account;
-                organizeEntity.F_CreatorTime = DateTime.Now;
-                organizeEntity.F_Id = System.Guid.NewGuid().ToString();
-                string[] notstr = { "ChildNodes" };
-                organizeApp.Add(organizeEntity, notstr);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    organizeEntity.F_CreatorUserId = uInfo.F_Account;
+                    organizeEntity.F_CreatorTime = DateTime.Now;
+                    organizeEntity.F_Id = System.Guid.NewGuid().ToString();
+                    string[] notstr = { "ChildNodes" };
+                    i = organizeApp.Add(organizeEntity, notstr);
+                }
+                else
+                {
+                    organizeEntity.F_Id = keyValue;
+                    organizeEntity.F_LastModifyUserId = uInfo.F_Account;
+                    organizeEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
+                    i = organizeApp.Update(organizeEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                organizeEntity.F_Id = keyValue;
-                organizeEntity.F_LastModifyUserId = uInfo.F_Account;
-                organizeEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
-                organizeApp.Update(organizeEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            organizeApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = organizeApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功。");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
         [NonAction]
         public List<Sys_Organize> Seach(List<Sys_Organize> list, string keyValue)
         {
             List<Sys_Organize> treeList = new List<Sys_Organize>();
-            foreach (Sys_Organize entity in list.Where(c=>c.F_FullName.Contains(keyValue)))
+            foreach (Sys_Organize entity in list.Where(c => c.F_FullName.Contains(keyValue)))
             {
                 treeList.Add(entity);
                 string pId = entity.F_ParentId;
@@ -134,7 +166,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                         break;
                     }
                     var upRecord = list.Where(c => c.F_Id == pId).ToList();
-                    if (upRecord != null&&upRecord.Count>0)
+                    if (upRecord != null && upRecord.Count > 0)
                     {
                         treeList.Add(upRecord[0]);
                         pId = upRecord[0].F_ParentId;

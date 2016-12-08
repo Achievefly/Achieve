@@ -88,6 +88,7 @@
     <Compile Include="VerifyCode.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="Web\AjaxResult.cs" />
+    <Compile Include="Web\ExtList.Comparint.cs" />
     <Compile Include="Web\Pagination.cs" />
     <Compile Include="Web\TreeGrid\TreeGrid.cs" />
     <Compile Include="Web\TreeGrid\TreeGridModel.cs" />

@@ -10,6 +10,7 @@ using System;
 using AchieveCommon.Web.Tree;
 using AchieveCommon.Web.TreeGrid;
 using System.Text;
+using AchieveCommon.Web;
 
 namespace AchieveManageWeb.Controllers
 {
@@ -27,7 +28,7 @@ namespace AchieveManageWeb.Controllers
                 duty = this.GetDutyList(),
                 user = "",
                 authorizeMenu = this.GetMenuList(),
-                //authorizeButton = this.GetMenuButtonList(),
+                authorizeButton = this.GetMenuButtonList(),
             };
             return Content(data.ToJson());
         }
@@ -99,15 +100,7 @@ namespace AchieveManageWeb.Controllers
         {
             Sys_User uInfo = ViewData["Account"] as Sys_User;
             var roleId = uInfo.F_RoleId;
-            //return ToMenuJson(new RoleAuthorizeApp().GetMenuList(roleId), "0");
-            if (roleId != null && roleId != "")
-            {
-                return new Sys_ModuleBLL().GetMRoleList(roleId);
-            }
-            else
-            {
-                return new Sys_ModuleBLL().GetAllModule();
-            }
+            return new Sys_ModuleBLL().GetMRoleList(roleId);
             
         }
         //private string ToMenuJson(List<Sys_Module> data, string parentId)
@@ -128,19 +121,24 @@ namespace AchieveManageWeb.Controllers
         //    sbJson.Append("]");
         //    return sbJson.ToString();
         //}
-        //private object GetMenuButtonList()
-        //{
-        //    Sys_User uInfo = ViewData["Account"] as Sys_User;
-        //    var roleId = uInfo.F_RoleId;
-        //    var data = new Sys_RoleAuthorizeBLL().GetButtonList(roleId);
-        //    var dataModuleId = data.Distinct(new ExtList<ModuleButtonEntity>("F_ModuleId"));
-        //    Dictionary<string, object> dictionary = new Dictionary<string, object>();
-        //    foreach (ModuleButtonEntity item in dataModuleId)
-        //    {
-        //        var buttonList = data.Where(t => t.F_ModuleId.Equals(item.F_ModuleId));
-        //        dictionary.Add(item.F_ModuleId, buttonList);
-        //    }
-        //    return dictionary;
-        //}
+        /// <summary>
+        /// 获取按钮
+        /// </summary>
+        /// <returns></returns>
+        private object GetMenuButtonList()
+        {
+            Sys_User uInfo = ViewData["Account"] as Sys_User;
+            var roleId = uInfo.F_RoleId;
+            var data = new Sys_ModuleButtonBLL().GetButtonList(roleId);
+            
+            var dataModuleId = data.Distinct(new ExtList<Sys_ModuleButton>("F_ModuleId"));
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (Sys_ModuleButton item in dataModuleId)
+            {
+                var buttonList = data.Where(t => t.F_ModuleId.Equals(item.F_ModuleId));
+                dictionary.Add(item.F_ModuleId, buttonList);
+            }
+            return dictionary;
+        }
     }
 }

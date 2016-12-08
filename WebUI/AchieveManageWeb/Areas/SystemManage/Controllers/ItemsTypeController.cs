@@ -57,7 +57,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson(string keyword="")
+        public ActionResult GetTreeGridJson(string keyword = "")
         {
             var data = itemsApp.GetList();
             var treeList = new List<TreeGridModel>();
@@ -90,32 +90,64 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(Sys_Items itemsEntity, string keyValue)
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            if (keyValue == "" || keyValue == null)
+            try
             {
-                itemsEntity.F_CreatorUserId = uInfo.F_Account;
-                itemsEntity.F_CreatorTime = DateTime.Now;
-                itemsEntity.F_Id = System.Guid.NewGuid().ToString();
-                string[] notstr = { "ChildNodes" };
-                itemsApp.Add(itemsEntity,notstr);
+                bool i = false;
+                Sys_User uInfo = ViewData["Account"] as Sys_User;
+                if (keyValue == "" || keyValue == null)
+                {
+                    itemsEntity.F_CreatorUserId = uInfo.F_Account;
+                    itemsEntity.F_CreatorTime = DateTime.Now;
+                    itemsEntity.F_Id = System.Guid.NewGuid().ToString();
+                    string[] notstr = { "ChildNodes" };
+                    i = itemsApp.Add(itemsEntity, notstr);
+                }
+                else
+                {
+                    itemsEntity.F_Id = keyValue;
+                    itemsEntity.F_LastModifyUserId = uInfo.F_Account;
+                    itemsEntity.F_LastModifyTime = DateTime.Now;
+                    string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime", "F_ParentId" };
+                    i = itemsApp.Update(itemsEntity, notstr);
+                }
+                if (i)
+                {
+                    return Success();
+                }
+                else
+                {
+                    return Warning();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                itemsEntity.F_Id = keyValue;
-                itemsEntity.F_LastModifyUserId = uInfo.F_Account;
-                itemsEntity.F_LastModifyTime = DateTime.Now;
-                string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime", "F_ParentId" };
-                itemsApp.Update(itemsEntity, notstr);
+                return Error(ex.Message);
             }
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            itemsApp.Delete(keyValue);
-            return Success("删除成功。");
+            try
+            {
+                bool i = false;
+                i = itemsApp.Delete(keyValue);
+                if (i)
+                {
+                    return Success("删除成功。");
+                }
+                else
+                {
+                    return Warning();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Error(ex.Message);
+            }
         }
     }
 }
