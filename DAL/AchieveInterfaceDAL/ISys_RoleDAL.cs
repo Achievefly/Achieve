@@ -19,7 +19,7 @@ namespace AchieveInterfaceDAL
         /// 获取对象
         /// </summary>
         /// <returns></returns>
-        Sys_Role GetForm(string table, string id);
+        Sys_Role GetForm(string id);
 
         bool Add(Sys_Role obj, List<Sys_RoleAuthorize> disstr, bool isadd);
 

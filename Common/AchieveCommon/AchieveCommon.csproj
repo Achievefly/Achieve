@@ -58,6 +58,7 @@
       <HintPath>..\..\WebUI\AchieveManageWeb\Library\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,7 +69,6 @@
   <ItemGroup>
     <Compile Include="AES.cs" />
     <Compile Include="Base\BaseDAL.cs" />
-    <Compile Include="Base\SugarConfigs.cs" />
     <Compile Include="Comm.cs" />
     <Compile Include="CookiesHelper.cs" />
     <Compile Include="DataConvert.cs" />
@@ -78,6 +78,8 @@
     <Compile Include="ListCommon.cs" />
     <Compile Include="Md5.cs" />
     <Compile Include="ModelUtil.cs" />
+    <Compile Include="Net\HttpMethods.cs" />
+    <Compile Include="Net\Net.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />
     <Compile Include="SqlInjection.cs" />
@@ -98,6 +100,12 @@
     <Compile Include="Web\Tree\TreeSelect.cs" />
     <Compile Include="Web\Tree\TreeSelectModel.cs" />
     <Compile Include="WriteLog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Entity\AchieveEntity\AchieveEntity.csproj">
+      <Project>{645e4991-17cb-4c86-8b76-44f7f717bd05}</Project>
+      <Name>AchieveEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

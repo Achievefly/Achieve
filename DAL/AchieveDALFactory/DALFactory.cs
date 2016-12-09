@@ -92,5 +92,11 @@ namespace AchieveDALFactory
             ISys_RoleAuthorizeDAL dal = GetInstance("Sys_RoleAuthorizeDAL") as ISys_RoleAuthorizeDAL;
             return dal;
         }
+
+        public static ISys_LogDAL GetLogDAL()
+        {
+            ISys_LogDAL dal = GetInstance("Sys_LogDAL") as ISys_LogDAL;
+            return dal;
+        }
     }
 }

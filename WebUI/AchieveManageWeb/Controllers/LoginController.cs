@@ -48,6 +48,8 @@ namespace AchieveManageWeb.Controllers
                     }            
                     //记录登录cookie
                     CookiesHelper.SetCookie("UserID", AES.EncryptStr(currentUser.F_Id.ToString()));
+                    CookiesHelper.SetCookie("UserAccount", AES.EncryptStr(currentUser.F_Account.ToString()));
+                    CookiesHelper.SetCookie("UserName", AES.EncryptStr(currentUser.F_RealName.ToString()));
 
                     return Json(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" });
                 }

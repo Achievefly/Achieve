@@ -157,7 +157,7 @@ $.modalConfirm = function (content, callBack) {
         callBack(false)
     });
 }
-$.modalAlert = function (content, typmodalOpene) {
+$.modalAlert = function (content, type) {
     var icon = "";
     if (type == 'success') {
         icon = "fa-check-circle";
@@ -277,9 +277,9 @@ $.deleteForm = function (options) {
                     success: function (data) {
                         if (data.state == "success") {
                             options.success(data);
-                            $.modalMsg(data.message, data.state);
-                        } else {
                             $.modalAlert(data.message, data.state);
+                        } else {
+                            $.modalMsg(data.message, data.state);
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {

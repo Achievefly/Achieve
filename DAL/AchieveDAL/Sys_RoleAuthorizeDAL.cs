@@ -18,7 +18,7 @@ namespace AchieveDAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override List<Sys_RoleAuthorize> GetList(string id = "")
+        public List<Sys_RoleAuthorize> GetList(string id = "")
         {
             using (var db = SqlSugarDao.GetInstance())
             {

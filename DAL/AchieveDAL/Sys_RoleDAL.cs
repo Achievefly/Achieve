@@ -13,7 +13,7 @@ namespace AchieveDAL
 {
     public class Sys_RoleDAL : BaseDAL<Sys_Role>, ISys_RoleDAL
     {
-        public override List<Sys_Role> GetList(string id = "")
+        public List<Sys_Role> GetList(string id = "")
         {
             using (var db = SqlSugarDao.GetInstance())
             {

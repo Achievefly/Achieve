@@ -50,7 +50,7 @@
     <Compile Include="Sys_Area.cs" />
     <Compile Include="Sys_ItemsDetail.cs" />
     <Compile Include="Sys_Items.cs" />
-    <Compile Include="Sys_LogEntity.cs" />
+    <Compile Include="Sys_Log.cs" />
     <Compile Include="Sys_ModuleButton.cs" />
     <Compile Include="Sys_Module.cs" />
     <Compile Include="Sys_ModuleForm.cs" />

@@ -40,7 +40,7 @@ namespace AchieveDAL
             }
 
         }
-        public override List<Sys_Module> GetList(string id="")
+        public List<Sys_Module> GetList(string id="")
         {
             using (var db = SqlSugarDao.GetInstance())
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using AchieveEntity;
 
 namespace AchieveCommon
 {
@@ -135,6 +136,29 @@ namespace AchieveCommon
                 }
             }
             catch { }
+        }
+
+        public static void WriteDatalog(string jsonstrstart, string jsongstrend, bool result, string description,string typestr)
+        {
+            using (var db = SqlSugarDao.GetInstance())
+            {
+                Sys_Log log = new Sys_Log();
+                log.F_Id = System.Guid.NewGuid().ToString();
+                log.F_Account = CookiesHelper.GetCookieValue("UserAccount");
+                log.F_CreatorTime = DateTime.Now;
+                log.F_CreatorUserId = "system";
+                log.F_Date = DateTime.Now;
+                log.F_NickName = CookiesHelper.GetCookieValue("UserName");
+                log.F_IPAddress = Net.Net.Ip;
+                log.F_IPAddressName = Net.Net.GetLocation(log.F_IPAddress);
+                log.F_Result = result;
+                log.F_Description = description;
+                log.F_Before = jsonstrstart;
+                log.F_Later = jsongstrend;
+                log.F_Type = typestr;
+                db.Insert(log);
+
+            }
         }
     }
 }

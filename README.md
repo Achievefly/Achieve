@@ -1,8 +1,8 @@
-# Achieve
+﻿# Achieve
 </br>
 MVC+三层+SqlSugar的系统框架
 <hr>
-<p>数据库在AppData目录</p>
+<p>数据库在DB目录</p>
 使用技术：
 ASP.NET MVC5
 SqlSugar ORM

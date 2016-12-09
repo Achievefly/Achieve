@@ -25,7 +25,7 @@ namespace AchieveBLL
 
         public Sys_Role GetForm(string id)
         {
-            return dal.GetForm("Sys_Role", id);
+            return dal.GetForm(id);
         }
 
         /// <summary>

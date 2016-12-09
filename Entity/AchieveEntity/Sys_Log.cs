@@ -9,8 +9,8 @@ namespace AchieveEntity
     /// <summary>
     /// 属性只作为初始化映射，SetMappingTables和SetMappingColumns可以覆盖，可按自己喜好选择
     /// </summary>
-    [SugarMapping(TableName = "Sys_ItemsDetail")]
-    public class Sys_LogEntity
+    [SugarMapping(TableName = "Sys_log")]
+    public class Sys_Log
     {
 
         /// <summary>
@@ -57,6 +57,14 @@ namespace AchieveEntity
         /// 描述
         /// </summary>
         public string F_Description { get; set; }
+        /// <summary>
+        /// 操作前
+        /// </summary>
+        public string F_Before { get; set; }
+        /// <summary>
+        /// 操作后
+        /// </summary>
+        public string F_Later { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

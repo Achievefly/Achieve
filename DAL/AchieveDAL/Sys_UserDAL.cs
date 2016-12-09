@@ -83,20 +83,6 @@ namespace AchieveDAL
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                //List<Sys_User> list = null;
-                //var data = db.Queryable<Sys_User>().
-                //        OrderBy(pagination.sidx + " " + pagination.sord).
-                //        Skip(pagination.rows * (pagination.page - 1)).
-                //        Take(pagination.rows * pagination.page);
-                //var count = db.Queryable<Sys_User>();
-
-                //list = data.ToList();
-                //records = count.Count();
-                //if (keyword != null && keyword != "")
-                //{
-                //    list = data.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).ToList();
-                //    records = count.Where(c => c.F_Account.Contains(keyword) || c.F_RealName.Contains(keyword) || c.F_MobilePhone.Contains(keyword)).Count(); ;
-                //}
                 var pageCount = 0;
                 List<Sys_User> list = null; 
                 if (keyword != null && keyword != "")
@@ -110,7 +96,6 @@ namespace AchieveDAL
                     list = db.Queryable<Sys_User>().OrderBy(pagination.sidx + " " + pagination.sord).ToPageList(pagination.page, pagination.rows, ref pageCount);
                 }
                 records = pageCount;
-                //更多分页函数
                 return list;
             }
         }

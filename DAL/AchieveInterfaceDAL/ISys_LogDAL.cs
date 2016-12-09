@@ -4,27 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AchieveEntity;
+using AchieveCommon.Web;
 
 namespace AchieveInterfaceDAL
 {
-    public interface ISys_RoleAuthorizeDAL
+    public interface ISys_LogDAL
     {
-
         /// <summary>
         /// 获取所有机构
         /// </summary>
         /// <returns></returns>
-        List<Sys_RoleAuthorize> GetList(string id = "");
+        List<Sys_Log> GetPageList(Pagination pagination, string keyword, out int records);
         /// <summary>
         /// 获取对象
         /// </summary>
         /// <returns></returns>
-        Sys_RoleAuthorize GetForm(string id);
+        Sys_Log GetForm(string id);
 
-        bool Add(Sys_RoleAuthorize obj, string[] disstr);
-
-        bool Delete(string idstr);
-
-        bool Update(Sys_RoleAuthorize obj, string[] disablestr = null);
+        bool Remove(string keeptiem);
     }
 }

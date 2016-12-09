@@ -25,7 +25,7 @@ namespace AchieveBLL
 
         public Sys_RoleAuthorize GetForm(string id)
         {
-            return dal.GetForm("Sys_RoleAuthorize", id);
+            return dal.GetForm(id);
         }
 
         /// <summary>
