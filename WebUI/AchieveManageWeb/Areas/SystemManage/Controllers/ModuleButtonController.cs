@@ -40,7 +40,10 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         {
             var data = moduleButtonApp.GetList(moduleId);
             var treeList = new List<TreeGridModel>();
-            data = data.TreeWhere(c => c.F_FullName.Contains(keyvalue));
+            if (keyvalue != "" && keyvalue != null)
+            {
+                data = data.TreeWhere(c => c.F_FullName.Contains(keyvalue));
+            }
             foreach (Sys_ModuleButton item in data)
             {
                 TreeGridModel treeModel = new TreeGridModel();

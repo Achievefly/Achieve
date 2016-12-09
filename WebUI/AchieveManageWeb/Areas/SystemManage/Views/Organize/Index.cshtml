@@ -51,52 +51,6 @@
             }).trigger('reloadGrid');
         });
     }
-    function btn_add() {
-        $.modalOpen({
-            id: "Form",
-            title: "新增机构",
-            url: "/SystemManage/Organize/Form",
-            width: "700px",
-            height: "520px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Form",
-            title: "修改机构",
-            url: "/SystemManage/Organize/Form?keyValue=" + keyValue,
-            width: "700px",
-            height: "520px",
-            callBack: function (iframeId) {
-                top.frames[iframeId].submitForm();
-            }
-        });
-    }
-    function btn_delete() {
-        $.deleteForm({
-            url: "/SystemManage/Organize/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").resetSelection();
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
-    }
-    function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalOpen({
-            id: "Details",
-            title: "查看机构",
-            url: "/SystemManage/Organize/Details?keyValue=" + keyValue,
-            width: "700px",
-            height: "560px",
-            btn: null,
-        });
-    }
 </script>
 
 <div class="topPanel">
@@ -105,14 +59,14 @@
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
         <div class="btn-group">
-            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建机构</a>
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add('gridList','Form','新建机构','/SystemManage/Organize/Form','/SystemManage/Organize/SubmitForm','700','520')"><i class="fa fa-plus"></i>新建机构</a>
         </div>
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改机构</a></li>
-                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除机构</a></li>
-                <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看机构</a></li>
+                <li><a id="NF-edit" authorize="yes" onclick="btn_edit('gridList','Form','修改机构','/SystemManage/Organize/Form','/SystemManage/Organize/GetFormJson','/SystemManage/Organize/SubmitForm','700','520')"><i class="fa fa-pencil-square-o"></i>修改机构</a></li>
+                <li><a id="NF-delete" authorize="yes" onclick="btn_delete('gridList','/SystemManage/Organize/DeleteForm')"><i class="fa fa-trash-o"></i>删除机构</a></li>
+                <li><a id="NF-Details" authorize="yes" onclick="btn_details('gridList','Form','查看机构','/SystemManage/Organize/Details','/SystemManage/Organize/GetFormJson','700','560')"><i class="fa fa-search-plus"></i>查看机构</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

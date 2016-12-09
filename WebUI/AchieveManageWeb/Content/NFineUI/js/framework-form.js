@@ -40,7 +40,7 @@ function btn_add(table, id, title, url,suburl, width, height) {
                 url: suburl,
                 param: $(top.frames[iframeId].document).find("form").formSerialize(),
                 success: function () {
-                    $.currentWindow().$("#" + table).trigger("reloadGrid");
+                    $("#" + table).trigger("reloadGrid");
                 }
             })
         }
@@ -92,7 +92,8 @@ function btn_edit(table, id, title, url, formurl,suburl, width, height) {
                 url: submiturl,
                 param: $(top.frames[iframeId].document).find("form").formSerialize(),
                 success: function () {
-                    $.currentWindow().$("#" + table).trigger("reloadGrid");
+                    $("#" + table).resetSelection();
+                    $("#" + table).trigger("reloadGrid");
                 }
             })
         }
@@ -116,7 +117,8 @@ function btn_delete(table, url) {
         url: url,
         param: { keyValue: $("#" + table).jqGridRowValue().F_Id },
         success: function () {
-            $.currentWindow().$("#" + table).trigger("reloadGrid");
+            $("#" + table).resetSelection();
+            $("#" + table).trigger("reloadGrid");
         }
     })
 }
@@ -138,12 +140,13 @@ function btn_confirm(table,url,msg) {
                 url: url,
                 param: { keyValue: keyValue },
                 success: function () {
-                    $.currentWindow().$("#" + table).trigger("reloadGrid");
+                    $("#" + table).trigger("reloadGrid");
                 }
             })
         }
     });
 }
+//详细查看
 function btn_details(table, id, title, url, formurl, width, height) {
     var keyValue = $("#" + table).jqGridRowValue().F_Id;
     if (keyValue == null || keyValue == "") {
@@ -170,8 +173,33 @@ function btn_details(table, id, title, url, formurl, width, height) {
                 async: false,
                 success: function (data) {
                     top.frames[iframeId].LoadForm(data);
+                    $(top.frames[iframeId].document).find("#form1").find('.form-control,input,textarea').attr('readonly', 'readonly');
+                    $(top.frames[iframeId].document).find("#form1").find('select').attr('disabled', 'disabled');
+                    $(top.frames[iframeId].document).find('div.ckbox label').attr('for', '');
                 }
             });
         }
+    });
+}
+
+//普通的打开指定窗口
+function btn_open(table, id, title, url, width, height) {
+    var keyValue = $("#gridList").jqGridRowValue().F_Id;
+    if (keyValue == null || keyValue == "") {
+        top.layer.alert("请选择一行数据", {
+            icon: "fa-exclamation-circle",
+            title: "系统提示",
+            btn: ['确认'],
+            btnclass: ['btn btn-primary'],
+        });
+        return false;
+    }
+    $.modalOpen({
+        id: id,
+        title: title,
+        url:  url + "?parentId=" + keyValue,
+        width: width + "px",
+        height: height + "px",
+        btn: null,
     });
 }

@@ -6,36 +6,16 @@
     var keyValue = $.request("keyValue");
     $(function () {
         initControl();
-        if (!!keyValue) {
-            $.ajax({
-                url: "/SystemManage/Organize/GetFormJson",
-                data: { keyValue: keyValue },
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    $("#form1").formSerialize(data);
-                }
-            });
-        }
     });
+    function LoadForm(data) {
+        initControl();
+        $("#form1").formSerialize(data);
+    }
     function initControl() {
         $("#F_CategoryId").select2({ minimumResultsForSearch: -1 })
         $("#F_ParentId").bindSelect({
             url: "/SystemManage/Organize/GetTreeSelectJson",
         });
-    }
-    function submitForm() {
-        if (!$('#form1').formValid()) {
-            return false;
-        }
-        $.submitForm({
-            url: "/SystemManage/Organize/SubmitForm?keyValue=" + keyValue,
-            param: $("#form1").formSerialize(),
-            success: function () {
-                $.currentWindow().$("#gridList").resetSelection();
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
-            }
-        })
     }
 </script>
 <form id="form1">

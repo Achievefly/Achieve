@@ -6,35 +6,15 @@
     var keyValue = $.request("keyValue");
     $(function () {
         initControl();
-        if (!!keyValue) {
-            $.ajax({
-                url: "/SystemManage/ItemsType/GetFormJson",
-                data: { keyValue: keyValue },
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    $("#form1").formSerialize(data);
-                }
-            });
-        }
     });
+    function LoadForm(data) {
+        initControl();
+        $("#form1").formSerialize(data);
+    }
     function initControl() {
         $("#F_ParentId").bindSelect({
             url: "/SystemManage/ItemsType/GetTreeSelectJson"
         });
-    }
-    function submitForm() {
-        if (!$('#form1').formValid()) {
-            return false;
-        }
-        $.submitForm({
-            url: "/SystemManage/ItemsType/SubmitForm?keyValue=" + keyValue,
-            param: $("#form1").formSerialize(),
-            success: function () {
-                top.ItemsType.$("#gridList").resetSelection();
-                top.ItemsType.$("#gridList").trigger("reloadGrid");
-            }
-        })
     }
 </script>
 

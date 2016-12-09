@@ -135,7 +135,7 @@
                 }
             });
             if (flag) {
-                var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-remove"></i></a>';
+                var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '">' + menuName + '<i class="fa fa-refresh"></i> <i class="fa fa-remove"></i></a>';
                 $('.menuTab').removeClass('active');
                 var str1 = '<iframe class="NFine_iframe" id="iframe' + dataId + '" name="iframe' + dataId + '"  width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
                 $('.mainContent').find('iframe.NFine_iframe').hide();
@@ -235,13 +235,16 @@
         },
         init: function () {
             $('.menuItem').on('click', $.nfinetab.addTab);
-            $('.menuTabs').on('click', '.menuTab i', $.nfinetab.closeTab);
+            //关闭按钮（找了半天）
+            $('.menuTabs').on('click', '.menuTab .fa-remove', $.nfinetab.closeTab);
+            //新增刷新按钮
+            $('.menuTabs').on('click', '.menuTab .fa-refresh', $.nfinetab.refreshTab);
             $('.menuTabs').on('click', '.menuTab', $.nfinetab.activeTab);
             $('.tabLeft').on('click', $.nfinetab.scrollTabLeft);
             $('.tabRight').on('click', $.nfinetab.scrollTabRight);
             $('.tabReload').on('click', $.nfinetab.refreshTab);
             $('.tabCloseCurrent').on('click', function () {
-                $('.page-tabs-content').find('.active i').trigger("click");
+                $('.page-tabs-content').find('.active').find(".fa-remove").trigger("click");
             });
             $('.tabCloseAll').on('click', function () {
                 $('.page-tabs-content').children("[data-id]").find('.fa-remove').each(function () {
@@ -264,6 +267,8 @@
                     exitFullscreen();
                 }
             });
+            //增加刷新按钮
+            //$('.page-tabs-content').find('.active').find(".fa-refresh").on('click', $.nfinetab.refreshTab);
         }
     };
     $(function () {
