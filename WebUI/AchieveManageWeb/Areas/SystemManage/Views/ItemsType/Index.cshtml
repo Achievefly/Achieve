@@ -6,10 +6,9 @@
     $(function () {
         gridList();
     })
-
-
-
-
+    $(window).resize(function () {
+        $.resize("gridList", 90);
+    });
     function gridList() {
         $("#gridList_type").dataGrid({
             treeGrid: true,

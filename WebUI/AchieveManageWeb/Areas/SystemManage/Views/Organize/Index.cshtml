@@ -6,6 +6,9 @@
     $(function () {
         gridList();
     })
+    $(window).resize(function () {
+        $.resize("gridList", 96);
+    });
     function gridList() {
         var $gridList = $("#gridList");
         $gridList.dataGrid({

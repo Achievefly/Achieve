@@ -2,6 +2,12 @@
     document.body.className = localStorage.getItem('config-skin');
     $("[data-toggle='tooltip']").tooltip();
 })
+$.resize = function (name,heigth) {
+    $(window).unbind("onresize");
+    $("#" + name).setGridHeight($(window).height() - heigth);
+    $("#" + name).setGridWidth($(window).width());
+    $(window).bind("onresize", this);
+}
 $.reload = function () {
     location.reload();
     return false;

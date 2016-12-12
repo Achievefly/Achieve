@@ -173,6 +173,15 @@
     <Compile Include="App_Start\JudgmentLoginAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
+    <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
+    <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
+    <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
+    <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\DutyController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\ItemsDataController.cs" />
@@ -2125,6 +2134,29 @@
     <Content Include="Areas\SystemSecurity\Views\Log\Index.cshtml" />
     <Content Include="Areas\SystemSecurity\Views\ServerMonitoring\Index.cshtml" />
     <Content Include="Areas\SystemSecurity\Views\Log\RemoveLog.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\BarCode\Index.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\Print\Index.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\SendMail\Index.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\SendMessages\Index.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\Signet\Index.cshtml" />
+    <Content Include="Areas\ExampleManage\Views\Web.config" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample1.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample10.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample11.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample12.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample13.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample14.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample15.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample16.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample2.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample3.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample4.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample5.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample6.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample7.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample8.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Highcharts\Sample9.cshtml" />
+    <Content Include="Areas\ReportManage\Views\Web.config" />
     <None Include="Properties\PublishProfiles\soulefu_manage_test.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="kindeditor-4.1.3\asp.net\bin\LitJSON.dll" />
@@ -3090,11 +3122,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="upload_json.ashx" />
     <Content Include="file_manager_json.ashx" />
-    <Content Include="动软生成器模板\AchieveDAL.cmt" />
-    <Content Include="动软生成器模板\AchieveDALFactory.cmt" />
-    <Content Include="动软生成器模板\AchieveEntity.cmt" />
-    <Content Include="动软生成器模板\AchieveInterfaceDAL.cmt" />
-    <Content Include="动软生成器模板\AchieveBLL.cmt" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Form.cshtml">
       <SubType>Code</SubType>
@@ -3104,6 +3131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\ReportManage\Views\Echarts\" />
     <Folder Include="attached\" />
     <Folder Include="uploads\" />
   </ItemGroup>

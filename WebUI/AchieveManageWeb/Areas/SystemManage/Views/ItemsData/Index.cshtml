@@ -8,6 +8,9 @@
         treeView();
         gridList();
     });
+    $(window).resize(function () {
+        $.resize("gridList", 96);
+    });
     function treeView() {
         $("#itemTree").treeview({
             url: "/SystemManage/ItemsType/GetTreeJson",
@@ -43,7 +46,9 @@
                     }
                 },
                 { label: "备注", name: "F_Description", index: "F_Description", width: 200, align: "left", sortable: false }
-            ]
+            ],
+            sortname: 'F_SortCode',
+            viewrecords: true
         });
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {

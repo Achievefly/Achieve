@@ -97,12 +97,12 @@ namespace AchieveCommon.Base
                 }
             }
         }
-        public virtual T GetForm(string table, string idstr, string idvalue)
+        public virtual T GetForm(string idstr, string idvalue)
         {
             using (var db = SqlSugarDao.GetInstance())
             {
                 List<T> list = new List<T>();
-                list = db.SqlQuery<T>("select * from " + table + " where " + idstr + "=@F_Id", new { F_Id = idvalue }).ToList<T>();
+                list = db.SqlQuery<T>("select * from " + GetTabelname() + " where " + idstr + "=@F_Id", new { F_Id = idvalue }).ToList<T>();
                 if (list.Count > 0)
                 {
                     return list[0];

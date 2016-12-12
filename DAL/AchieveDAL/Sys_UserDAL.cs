@@ -26,7 +26,7 @@ namespace AchieveDAL
         {
             using (var db = SqlSugarDao.GetInstance())
             {
-                List<Sys_User> list = db.Queryable<Sys_User>().Where(c => c.F_Account == loginId && c.F_Password == loginPwd).ToList();
+                List<Sys_User> list = db.Queryable<Sys_User>().Where(c=>c.F_EnabledMark == true).Where(c => c.F_Account == loginId && c.F_Password == loginPwd).ToList();
                 if (list.Count > 0)
                 {
                     return list[0];

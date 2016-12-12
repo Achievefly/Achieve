@@ -28,9 +28,9 @@ namespace AchieveCommon
         public static SqlSugarClient GetInstance()
         {
             var db = new SqlSugarClient(ConnectionString);
-            //db.SetMappingTables(SugarConfigs.MpList);//设置关联表 (引用地址赋值，每次赋值都只是存储一个内存地址)
-            db.IsEnableAttributeMapping = true;
+            db.IsEnableAttributeMapping = true;//启用属性映射
             db.IsEnableLogEvent = true;//启用监控
+            db.IsIgnoreErrorColumns = true;//忽略非数据库列
             db.LogEventStarting = (sql, par) => { AchieveCommon.WriteLog.WriteMessage("SQLLogInfo", sql + " " + par + "\r\n"); };
             return db;
         }

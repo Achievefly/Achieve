@@ -261,14 +261,12 @@
             $('.fullscreen').on('click', function () {
                 if (!$(this).attr('fullscreen')) {
                     $(this).attr('fullscreen', 'true');
-                    requestFullScreen();
+                    $.nfinetab.requestFullScreen();
                 } else {
                     $(this).removeAttr('fullscreen')
-                    exitFullscreen();
+                    $.nfinetab.exitFullscreen();
                 }
             });
-            //增加刷新按钮
-            //$('.page-tabs-content').find('.active').find(".fa-refresh").on('click', $.nfinetab.refreshTab);
         }
     };
     $(function () {
