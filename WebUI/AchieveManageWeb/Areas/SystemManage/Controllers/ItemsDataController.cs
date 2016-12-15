@@ -7,6 +7,7 @@ using AchieveBLL;
 using AchieveManageWeb.App_Start.BaseController;
 using AchieveEntity;
 using System;
+using AchieveCommon.Operator;
 
 namespace AchieveManageWeb.Areas.SystemManage.Controllers
 {
@@ -51,7 +52,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 Sys_User uInfo = ViewData["Account"] as Sys_User;
                 if (keyValue == "" || keyValue == null)
                 {
-                    itemsDetailEntity.F_CreatorUserId = uInfo.F_Account;
+                    itemsDetailEntity.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     itemsDetailEntity.F_CreatorTime = DateTime.Now;
                     itemsDetailEntity.F_Id = System.Guid.NewGuid().ToString();
                     i = itemsDetailApp.Add(itemsDetailEntity);
@@ -59,7 +60,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 else
                 {
                     itemsDetailEntity.F_Id = keyValue;
-                    itemsDetailEntity.F_LastModifyUserId = uInfo.F_Account;
+                    itemsDetailEntity.F_LastModifyUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     itemsDetailEntity.F_LastModifyTime = DateTime.Now;
                     string[] notstr = { "F_CreatorUserId", "F_CreatorTime", "F_ParentId", "F_ItemId" };
                     i = itemsDetailApp.Update(itemsDetailEntity, notstr);

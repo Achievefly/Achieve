@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AchieveCommon.Web;
+using AchieveCommon.Operator;
+using AchieveCommon.Net;
 
 namespace AchieveManageWeb.Controllers
 {
@@ -45,11 +47,34 @@ namespace AchieveManageWeb.Controllers
                     {
                         //return Content("");
                         return Json(new AjaxResult { state = ResultType.warning.ToString(), message = "用户已被禁用，请您联系管理员" });
-                    }            
+                    }
+
                     //记录登录cookie
-                    CookiesHelper.SetCookie("UserID", AES.EncryptStr(currentUser.F_Id.ToString()));
-                    CookiesHelper.SetCookie("UserAccount", AES.EncryptStr(currentUser.F_Account.ToString()));
-                    CookiesHelper.SetCookie("UserName", AES.EncryptStr(currentUser.F_RealName.ToString()));
+                    //CookiesHelper.SetCookie("UserID", AES.EncryptStr(currentUser.F_Id.ToString()));
+                    //CookiesHelper.SetCookie("UserAccount", AES.EncryptStr(currentUser.F_Account.ToString()));
+                    //CookiesHelper.SetCookie("UserName", AES.EncryptStr(currentUser.F_RealName.ToString()));
+                    //CookiesHelper.SetCookie("UserRoleId", AES.EncryptStr(currentUser.F_RoleId.ToString()));
+                    
+                    OperatorModel operatorModel = new OperatorModel();
+                    operatorModel.UserId = currentUser.F_Id;
+                    operatorModel.UserCode = currentUser.F_Account;
+                    operatorModel.UserName = currentUser.F_RealName;
+                    operatorModel.CompanyId = currentUser.F_OrganizeId;
+                    operatorModel.DepartmentId = currentUser.F_DepartmentId;
+                    operatorModel.RoleId = currentUser.F_RoleId;
+                    operatorModel.LoginIPAddress = Net.Ip;
+                    operatorModel.LoginIPAddressName = Net.GetLocation(operatorModel.LoginIPAddress);
+                    operatorModel.LoginTime = DateTime.Now;
+                    //operatorModel.LoginToken = DESEncrypt.Encrypt(Guid.NewGuid().ToString());
+                    if (currentUser.F_Account == "admin")
+                    {
+                        operatorModel.IsSystem = true;
+                    }
+                    else
+                    {
+                        operatorModel.IsSystem = false;
+                    }
+                    OperatorProvider.Provider.AddCurrent(operatorModel);
 
                     return Json(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" });
                 }

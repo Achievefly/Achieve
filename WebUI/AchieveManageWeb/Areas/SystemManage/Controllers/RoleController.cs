@@ -8,6 +8,7 @@ using AchieveManageWeb.App_Start.BaseController;
 using AchieveEntity;
 using System;
 using AchieveCommon.Web;
+using AchieveCommon.Operator;
 
 namespace AchieveManageWeb.Areas.SystemManage.Controllers
 {
@@ -37,10 +38,9 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
             try
             {
                 bool i = false;
-                Sys_User uInfo = ViewData["Account"] as Sys_User;
                 if (keyValue == "" || keyValue == null)
                 {
-                    roleEntity.F_CreatorUserId = uInfo.F_Account;
+                    roleEntity.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     roleEntity.F_CreatorTime = DateTime.Now;
                     roleEntity.F_Category = 1;
                     roleEntity.F_Id = System.Guid.NewGuid().ToString();
@@ -49,7 +49,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 else
                 {
                     roleEntity.F_Id = keyValue;
-                    roleEntity.F_LastModifyUserId = uInfo.F_Account;
+                    roleEntity.F_LastModifyUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     roleEntity.F_LastModifyTime = DateTime.Now;
                     i = roleApp.Add(roleEntity, permissionIds.Split(','), false);
                 }

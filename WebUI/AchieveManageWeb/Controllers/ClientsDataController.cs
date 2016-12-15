@@ -11,6 +11,7 @@ using AchieveCommon.Web.Tree;
 using AchieveCommon.Web.TreeGrid;
 using System.Text;
 using AchieveCommon.Web;
+using AchieveCommon.Operator;
 
 namespace AchieveManageWeb.Controllers
 {
@@ -98,8 +99,8 @@ namespace AchieveManageWeb.Controllers
         }
         private object GetMenuList()
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            var roleId = uInfo.F_RoleId;
+            var roleId = OperatorProvider.Provider.GetCurrent().RoleId;
+            WriteLog.WriteMessage("LogInfo", roleId);
             return new Sys_ModuleBLL().GetMRoleList(roleId);
             
         }
@@ -127,8 +128,8 @@ namespace AchieveManageWeb.Controllers
         /// <returns></returns>
         private object GetMenuButtonList()
         {
-            Sys_User uInfo = ViewData["Account"] as Sys_User;
-            var roleId = uInfo.F_RoleId;
+            var roleId = OperatorProvider.Provider.GetCurrent().RoleId;
+            WriteLog.WriteMessage("LogInfo", roleId);
             var data = new Sys_ModuleButtonBLL().GetButtonList(roleId);
             
             var dataModuleId = data.Distinct(new ExtList<Sys_ModuleButton>("F_ModuleId"));

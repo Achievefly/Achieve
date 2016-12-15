@@ -11,6 +11,7 @@ using AchieveCommon.Web;
 using AchieveCommon.Web.Tree;
 using AchieveCommon.Web.TreeView;
 using AchieveCommon.Web.TreeGrid;
+using AchieveCommon.Operator;
 
 namespace AchieveManageWeb.Areas.SystemManage.Controllers
 {
@@ -72,10 +73,9 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
             try
             {
                 bool i = false;
-                Sys_User uInfo = ViewData["Account"] as Sys_User;
                 if (keyValue == "" || keyValue == null)
                 {
-                    moduleButtonEntity.F_CreatorUserId = uInfo.F_Account;
+                    moduleButtonEntity.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     moduleButtonEntity.F_CreatorTime = DateTime.Now;
                     moduleButtonEntity.F_Id = System.Guid.NewGuid().ToString();
                     i = moduleButtonApp.Add(moduleButtonEntity);
@@ -83,7 +83,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 else
                 {
                     moduleButtonEntity.F_Id = keyValue;
-                    moduleButtonEntity.F_LastModifyUserId = uInfo.F_Account;
+                    moduleButtonEntity.F_LastModifyUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     moduleButtonEntity.F_LastModifyTime = DateTime.Now;
                     string[] notstr = { "F_CreatorUserId", "F_CreatorTime" };
                     i = moduleButtonApp.Update(moduleButtonEntity, notstr);

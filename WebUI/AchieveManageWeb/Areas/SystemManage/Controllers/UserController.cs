@@ -8,6 +8,7 @@ using AchieveManageWeb.App_Start.BaseController;
 using AchieveEntity;
 using System;
 using AchieveCommon.Web;
+using AchieveCommon.Operator;
 
 
 namespace AchieveManageWeb.Areas.SystemManage.Controllers
@@ -44,10 +45,9 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
             try
             {
                 bool i = false;
-                Sys_User uInfo = ViewData["Account"] as Sys_User;
                 if (keyValue == "" || keyValue == null)
                 {
-                    userEntity.F_CreatorUserId = uInfo.F_Account;
+                    userEntity.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     userEntity.F_CreatorTime = DateTime.Now;
                     userEntity.F_Id = System.Guid.NewGuid().ToString();
                     i = userApp.Add(userEntity);
@@ -55,7 +55,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 else
                 {
                     userEntity.F_Id = keyValue;
-                    userEntity.F_LastModifyUserId = uInfo.F_Account;
+                    userEntity.F_LastModifyUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     userEntity.F_LastModifyTime = DateTime.Now;
                     string[] notstr = { "F_Password", "F_HeadIcon", "F_SecurityLevel", "F_Signature", "F_CreatorUserId", "F_CreatorTime" };
                     i = userApp.Update(userEntity, notstr);

@@ -9,6 +9,7 @@ using AchieveEntity;
 using System;
 using AchieveCommon.Web.Tree;
 using AchieveCommon.Web.TreeGrid;
+using AchieveCommon.Operator;
 
 namespace AchieveManageWeb.Areas.SystemManage.Controllers
 {
@@ -72,10 +73,9 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
             try
             {
                 bool i =false;
-                Sys_User uInfo = ViewData["Account"] as Sys_User;
                 if (keyValue == "" || keyValue == null)
                 {
-                    areaEntity.F_CreatorUserId = uInfo.F_Account;
+                    areaEntity.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     areaEntity.F_CreatorTime = DateTime.Now;
                     areaEntity.F_Id = System.Guid.NewGuid().ToString();
                     string[] notstr = { "ChildNodes" };
@@ -84,7 +84,7 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
                 else
                 {
                     areaEntity.F_Id = keyValue;
-                    areaEntity.F_LastModifyUserId = uInfo.F_Account;
+                    areaEntity.F_LastModifyUserId = OperatorProvider.Provider.GetCurrent().UserCode;
                     areaEntity.F_LastModifyTime = DateTime.Now;
                     string[] notstr = { "ChildNodes", "F_CreatorUserId", "F_CreatorTime" };
                     i = areaApp.Update(areaEntity, notstr);
