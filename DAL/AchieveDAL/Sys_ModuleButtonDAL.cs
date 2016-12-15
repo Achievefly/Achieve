@@ -62,26 +62,6 @@ namespace AchieveDAL
             }
         }
         /// <summary>
-        /// id获取菜单按钮
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Sys_ModuleButton GetForm(string id)
-        {
-            using (var db = SqlSugarDao.GetInstance())
-            {
-                var data = db.Queryable<Sys_ModuleButton>().Where(c => c.F_Id == id).ToList();
-                if (data.Count > 0)
-                {
-                    return data[0];
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-        /// <summary>
         /// 根据角色获取按钮
         /// </summary>
         /// <param name="roleid"></param>

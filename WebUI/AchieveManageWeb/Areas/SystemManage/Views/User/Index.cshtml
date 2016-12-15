@@ -6,10 +6,6 @@
 <script>
     $(function () {
         gridList();
-        $('#export').click(function () {
-            var title = "供应信息";
-            getXlsFromTbl('gridList', 'gridPanel', title, true)
-        });
     })
     $(window).resize(function () {
         $.resize("gridList",128);
@@ -113,7 +109,6 @@
                 <li class="split"></li>
                 <li><a id="NF-revisepassword" authorize="yes" onclick="btn_revisepassword()"><i class="fa fa-key"></i>密码重置</a></li>
                 <li class="split"></li>
-                <li><button id="export" value="导出">导出</button> </li>
                 <li><a id="NF-disabled" authorize="yes" onclick="btn_confirm('gridList','/SystemManage/User/DisabledAccount','注：您确定要【禁用】该项账户吗？')"><i class="fa fa-stop-circle"></i>禁用</a></li>
                 <li><a id="NF-enabled" authorize="yes" onclick="btn_confirm('gridList','/SystemManage/User/EnabledAccount','注：您确定要【启用】该项账户吗？')"><i class="fa fa-play-circle"></i>启用</a></li>
             </ul>

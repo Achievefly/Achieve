@@ -61,25 +61,5 @@ namespace AchieveDAL
                 }
             }
         }
-        /// <summary>
-        /// id获取机构
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Sys_Area GetForm(string id)
-        {
-            using (var db = SqlSugarDao.GetInstance())
-            {
-                var data = db.Queryable<Sys_Area>().Where(c => c.F_Id == id).ToList();
-                if (data.Count > 0)
-                {
-                    return data[0];
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
     }
 }
