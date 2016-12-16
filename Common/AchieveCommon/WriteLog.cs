@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using AchieveCommon.Operator;
 using AchieveEntity;
 
 namespace AchieveCommon
@@ -144,15 +145,15 @@ namespace AchieveCommon
             {
                 Sys_Log log = new Sys_Log();
                 log.F_Id = System.Guid.NewGuid().ToString();
-                log.F_Account = CookiesHelper.GetCookieValue("UserAccount");
+                log.F_Account = OperatorProvider.Provider.GetCurrent().UserCode;
                 log.F_CreatorTime = DateTime.Now;
                 log.F_CreatorUserId = "system";
                 log.F_Date = DateTime.Now;
-                log.F_NickName = CookiesHelper.GetCookieValue("UserName");
+                log.F_NickName = OperatorProvider.Provider.GetCurrent().UserName;
                 log.F_IPAddress = Net.Net.Ip;
                 log.F_IPAddressName = Net.Net.GetLocation(log.F_IPAddress);
                 log.F_Result = result;
-                log.F_Description = description;
+                log.F_Description = "表名：" + description;
                 log.F_Before = jsonstrstart;
                 log.F_Later = jsongstrend;
                 log.F_Type = typestr;

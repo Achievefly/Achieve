@@ -20,7 +20,7 @@ namespace AchieveCommon.Base
                 }
                 bool add = db.Insert<T>(obj).ObjToBool();
                 string str = obj.ToJson();
-                WriteLog.WriteDatalog(str,"",add,"新增操作","新增");
+                WriteLog.WriteDatalog(str, "", add, GetTabelname(), "新增");
                 return add;
             }
         }
@@ -34,7 +34,7 @@ namespace AchieveCommon.Base
                 }
                 bool add = db.InsertRange(obj).ObjToBool();
                 string str = obj.ToJson();
-                WriteLog.WriteDatalog(str, "", add, "批量新增操作","新增");
+                WriteLog.WriteDatalog(str, "", add, GetTabelname(), "新增");
                 return add;
             }
         }
@@ -52,7 +52,7 @@ namespace AchieveCommon.Base
             using (var db = SqlSugarDao.GetInstance())
             {
                 bool i = db.Delete<T>("F_Id=@F_Id", new { F_Id = id }).ObjToBool();
-                WriteLog.WriteDatalog(str, "", i, "删除操作","删除");
+                WriteLog.WriteDatalog(str, "", i, GetTabelname(), "删除");
                 return i;
             }
         }
@@ -68,7 +68,7 @@ namespace AchieveCommon.Base
                     db.AddDisableUpdateColumns(disablestr);//添加禁止更新列
                 }
                 bool i = db.Update<T>(obj).ObjToBool();
-                WriteLog.WriteDatalog(str, obj.ToJson(), i, "修改操作","修改");
+                WriteLog.WriteDatalog(str, obj.ToJson(), i, GetTabelname(), "修改");
                 return i;
             }
         }
