@@ -65,7 +65,7 @@
                             <li class="dropdown profile-dropdown">
                                 <a href="#" class="dropdown" data-toggle="dropdown">
                                     <img src="~/Content/NFineUI/img/samples/scarlet-159.png" alt="" />
-                                    <span class="hidden-xs">@ViewBag.RealName</span>
+                                    <span class="hidden-xs">@AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserCode</span>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a class="menuItem" data-id="userInfo" href="/SystemManage/User/Info"><i class="fa fa-user"></i>个人信息</a></li>
@@ -90,7 +90,7 @@
                                 <img alt="" src="~/Content/NFineUI/img/samples/scarlet-159.png" />
                                 <div class="user-box">
                                     <span class="name">
-                                        @ViewBag.AccountName
+                                        @AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserCode
                                     </span>
                                     <span class="status">
                                         <i class="fa fa-circle"></i>在线
