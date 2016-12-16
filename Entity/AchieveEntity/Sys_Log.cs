@@ -20,7 +20,7 @@ namespace AchieveEntity
         /// <summary>
         /// 日期
         /// </summary>
-        public DateTime F_Date { get; set; }
+        public DateTime? F_Date { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -52,7 +52,7 @@ namespace AchieveEntity
         /// <summary>
         /// 结果
         /// </summary>
-        public bool F_Result { get; set; }
+        public bool? F_Result { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
@@ -68,7 +68,7 @@ namespace AchieveEntity
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime F_CreatorTime { get; set; }
+        public DateTime? F_CreatorTime { get; set; }
         /// <summary>
         /// 创建用户
         /// </summary>

@@ -6,6 +6,9 @@
     $(function () {
         gridList();
     })
+    $(window).resize(function () {
+        $.resize("gridList", 128);
+    });
     function gridList() {
         var $gridList = $("#gridList");
         $gridList.dataGrid({
@@ -100,7 +103,7 @@
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="NF-Details" authorize="yes" onclick="btn_details('gridList','Form','查看日志','/SystemManage/Duty/Details','/SystemManage/Duty/GetFormJson','450','500')"><i class="fa fa-search-plus"></i>查看日志</a></li>
+                <li><a id="NF-Details" authorize="yes" onclick="btn_details('gridList','Form','查看日志','/SystemSecurity/Log/Details','/SystemSecurity/Log/GetFormJson','450','600')"><i class="fa fa-search-plus"></i>查看日志</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

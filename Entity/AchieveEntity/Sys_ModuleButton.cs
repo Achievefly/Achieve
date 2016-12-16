@@ -28,7 +28,7 @@ namespace AchieveEntity
         /// <summary>
         /// 层次
         /// </summary>
-        public int F_Layers { get; set; }
+        public int? F_Layers { get; set; }
         /// <summary>
         /// 编码
         /// </summary>
@@ -44,7 +44,7 @@ namespace AchieveEntity
         /// <summary>
         /// 位置
         /// </summary>
-        public int F_Location { get; set; }
+        public int? F_Location { get; set; }
         /// <summary>
         /// 事件
         /// </summary>
@@ -56,31 +56,31 @@ namespace AchieveEntity
         /// <summary>
         /// 分开线
         /// </summary>
-        public bool F_Split { get; set; }
+        public bool? F_Split { get; set; }
         /// <summary>
         /// 公共
         /// </summary>
-        public bool F_IsPublic { get; set; }
+        public bool? F_IsPublic { get; set; }
         /// <summary>
         /// 允许编辑
         /// </summary>
-        public bool F_AllowEdit { get; set; }
+        public bool? F_AllowEdit { get; set; }
         /// <summary>
         /// 允许删除
         /// </summary>
-        public bool F_AllowDelete { get; set; }
+        public bool? F_AllowDelete { get; set; }
         /// <summary>
         /// 排序码
         /// </summary>
-        public int F_SortCode { get; set; }
+        public int? F_SortCode { get; set; }
         /// <summary>
         /// 删除标志
         /// </summary>
-        public bool F_DeleteMark { get; set; }
+        public bool? F_DeleteMark { get; set; }
         /// <summary>
         /// 有效标志
         /// </summary>
-        public bool F_EnabledMark { get; set; }
+        public bool? F_EnabledMark { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
@@ -88,7 +88,7 @@ namespace AchieveEntity
         /// <summary>
         /// 创建日期
         /// </summary>
-        public DateTime F_CreatorTime { get; set; }
+        public DateTime? F_CreatorTime { get; set; }
         /// <summary>
         /// 创建用户主键
         /// </summary>
@@ -96,7 +96,7 @@ namespace AchieveEntity
         /// <summary>
         /// 最后修改时间
         /// </summary>
-        public DateTime F_LastModifyTime { get; set; }
+        public DateTime? F_LastModifyTime { get; set; }
         /// <summary>
         /// 最后修改用户
         /// </summary>
@@ -104,7 +104,7 @@ namespace AchieveEntity
         /// <summary>
         /// 删除时间
         /// </summary>
-        public DateTime F_DeleteTime { get; set; }
+        public DateTime? F_DeleteTime { get; set; }
         /// <summary>
         /// 删除用户
         /// </summary>

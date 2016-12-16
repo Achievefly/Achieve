@@ -70,16 +70,16 @@
             }
         });
     }
-    function btn_edits() {
-        var keyvalue = $("#gridlist").jqgridrowvalue().f_id;
-        $.modalopen({
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
             id: "form",
             title: "修改按钮",
-            url: "/systemmanage/modulebutton/form?moduleid=" + moduleid + "&keyvalue=" + keyvalue,
+            url: "/systemmanage/modulebutton/form?moduleId=" + moduleId + "&keyValue=" + keyValue,
             width: "700px",
             height: "440px",
-            callback: function (iframeid) {
-                top.frames[iframeid].submitform();
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
             }
         });
     }

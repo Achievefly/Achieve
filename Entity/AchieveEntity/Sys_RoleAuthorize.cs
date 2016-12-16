@@ -20,7 +20,7 @@ namespace AchieveEntity
         /// <summary>
         /// 项目类型1-模块2-按钮3-列表
         /// </summary>
-        public int F_ItemType { get; set; }
+        public int? F_ItemType { get; set; }
         /// <summary>
         /// 项目主键
         /// </summary>
@@ -28,7 +28,7 @@ namespace AchieveEntity
         /// <summary>
         /// 对象分类1-角色2-部门-3用户
         /// </summary>
-        public int F_ObjectType { get; set; }
+        public int? F_ObjectType { get; set; }
         /// <summary>
         /// 对象主键
         /// </summary>
@@ -36,11 +36,11 @@ namespace AchieveEntity
         /// <summary>
         /// 排序码
         /// </summary>
-        public int F_SortCode { get; set; }
+        public int? F_SortCode { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime F_CreatorTime { get; set; }
+        public DateTime? F_CreatorTime { get; set; }
         /// <summary>
         /// 创建用户
         /// </summary>

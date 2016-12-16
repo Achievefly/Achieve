@@ -57,5 +57,12 @@ namespace AchieveManageWeb.Areas.SystemSecurity.Controllers
                 return Error(ex.Message);
             }
         }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string keyValue)
+        {
+            var data = logApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
     }
 }

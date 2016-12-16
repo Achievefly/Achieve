@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script type="text/javascript" src="~/Content/NFineUI/js/preetyTextDiff/diff_match_patch.js"></script>
+<script type="text/javascript" src="~/Content/NFineUI/js/preetyTextDiff/jquery.pretty-text-diff.min.js"></script>
+<style>
+    ins
+    {
+        background-color: #c6ffc6;
+        text-decoration: none;
+    }
+
+    del
+    {
+        background-color: #ffc6c6;
+    }
+</style>
+<script>
+    function LoadForm(data) {
+        $("#form1").formSerialize(data);
+        $(".form").prettyTextDiff({ originalContent: $("#F_Before").val(), changedContent: $("#F_Later").val(), diffContainer: "#F_Diff" });
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">日期</th>
+                <td class="formValue">
+                    <input id="F_Date" name="F_Date" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">账户</th>
+                <td class="formValue">
+                    <input id="F_Account" name="F_Account" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">姓名</th>
+                <td class="formValue">
+                    <input id="F_NickName" name="F_NickName" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">操作类型</th>
+                <td class="formValue">
+                    <input id="F_Type" name="F_Type" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">IP地址</th>
+                <td class="formValue">
+                    <input id="F_IPAddress" name="F_IPAddress" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">IP地址详细</th>
+                <td class="formValue">
+                    <input id="F_IPAddressName" name="F_IPAddressName" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">操作前内容
+                </th>
+                <td class="formValue">
+                    <textarea id="F_Before" name="F_Before" class="form-control" style="height: 100px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">操作后内容
+                </th>
+                <td class="formValue">
+                    <textarea id="F_Later" name="F_Later" class="form-control" style="height: 100px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">比较后内容
+                </th>
+                <td class="formValue">
+                    @*<textarea id="F_Diff" name="F_Diff" class="form-control F_Diff" style="height: 120px;"></textarea>*@
+                    <div id="F_Diff" style="width:280px;white-space:normal;word-wrap:break-word;"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
