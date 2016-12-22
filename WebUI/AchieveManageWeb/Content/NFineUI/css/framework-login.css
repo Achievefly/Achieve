@@ -8,7 +8,7 @@ body{font-family: 'Source Sans Pro', sans-serif;font-size:12px;}
 .container .logo h1{padding-top:2px;padding-left:15px;float:left;font-size: 22px;font-weight: bold;color:#fff;text-shadow: 4px 3px 0 #1ABC9C,90px 80px 0 rgba(0,0,0,0.15);}
 .container .logo span{font-size: 30px;font-weight: bold;}
 form{position: relative;z-index: 2;text-align:left;background-color:#ebeff0;padding: 50px;border-radius: 5px;box-shadow: 0 0 10px rgba(0,0,0,.1);}
-form input{font-size: 14px;outline: 0;border: 1px solid rgba(255, 255, 255, 0.4);background-color: #fff;width: 300px;border-radius: 5px;padding: 12px 15px;margin-bottom:20px;display: block;text-align: left;color: #929191;-webkit-transition-duration: 0.25s;transition-duration: 0.25s;font-weight: 300;}
+form input{height:40px;font-size: 14px;outline: 0;border: 1px solid rgba(255, 255, 255, 0.4);background-color: #fff;width: 300px;border-radius: 5px;padding: 12px 15px;margin-bottom:20px;display: block;text-align: left;color: #929191;-webkit-transition-duration: 0.25s;transition-duration: 0.25s;font-weight: 300;}
 form .row{position: relative;overflow:hidden;}
 form i{color: #cbcbcb;top: 13px;right: 6px;z-index: 99;position: absolute;display: block;width: 30px;height: 30px;text-align: center;font-size: 18px !important;}
 form .row .authcode{position: absolute;left:105px;top: 10px;}

@@ -98,5 +98,11 @@ namespace AchieveDALFactory
             ISys_LogDAL dal = GetInstance("Sys_LogDAL") as ISys_LogDAL;
             return dal;
         }
+
+        public static ISys_FileDAL GetFileDAL()
+        {
+            ISys_FileDAL dal = GetInstance("Sys_FileDAL") as ISys_FileDAL;
+            return dal;
+        }
     }
 }

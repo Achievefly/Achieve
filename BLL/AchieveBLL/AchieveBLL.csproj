@@ -57,6 +57,7 @@
     <Compile Include="Sys_ModuleButtonBLL.cs" />
     <Compile Include="Sys_RoleAuthorizeBLL.cs" />
     <Compile Include="Sys_LogBLL.cs" />
+    <Compile Include="Sys_FileBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AchieveCommon\AchieveCommon.csproj">

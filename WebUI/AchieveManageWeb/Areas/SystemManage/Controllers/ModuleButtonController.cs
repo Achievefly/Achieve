@@ -37,24 +37,27 @@ namespace AchieveManageWeb.Areas.SystemManage.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson(string moduleId, string keyvalue)
+        public ActionResult GetTreeGridJson(string moduleId, string keyword)
         {
             var data = moduleButtonApp.GetList(moduleId);
             var treeList = new List<TreeGridModel>();
-            if (keyvalue != "" && keyvalue != null)
+            if (keyword != "" && keyword != null)
             {
-                data = data.TreeWhere(c => c.F_FullName.Contains(keyvalue));
+                data = data.TreeWhere(c => c.F_FullName.Contains(keyword));
             }
-            foreach (Sys_ModuleButton item in data)
+            if (data != null)
             {
-                TreeGridModel treeModel = new TreeGridModel();
-                bool hasChildren = data.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
-                treeModel.id = item.F_Id;
-                treeModel.isLeaf = hasChildren;
-                treeModel.parentId = item.F_ParentId;
-                treeModel.expanded = hasChildren;
-                treeModel.entityJson = item.ToJson();
-                treeList.Add(treeModel);
+                foreach (Sys_ModuleButton item in data)
+                {
+                    TreeGridModel treeModel = new TreeGridModel();
+                    bool hasChildren = data.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
+                    treeModel.id = item.F_Id;
+                    treeModel.isLeaf = hasChildren;
+                    treeModel.parentId = item.F_ParentId;
+                    treeModel.expanded = hasChildren;
+                    treeModel.entityJson = item.ToJson();
+                    treeList.Add(treeModel);
+                }
             }
             return Content(treeList.TreeGridJson());
         }

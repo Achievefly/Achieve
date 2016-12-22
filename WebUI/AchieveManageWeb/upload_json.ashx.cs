@@ -29,38 +29,48 @@ namespace AchieveManageWeb
             //定义允许上传的文件扩展名
             Hashtable extTable = new Hashtable();
             extTable.Add("image", "gif,jpg,jpeg,png,bmp");
-            extTable.Add("flash", "swf,flv");
-            extTable.Add("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
+            extTable.Add("media", "swf,flv,mid,avi,mpg,asf,rm,rmvb");
             extTable.Add("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
+            extTable.Add("music", "mp3,wav,wma,wmv");
 
             //最大文件大小
             int maxSize = 1000000;
             this.context = context;
 
-            HttpPostedFile imgFile = context.Request.Files["imgFile"];
+            HttpPostedFile imgFile = context.Request.Files["File"];
             if (imgFile == null)
             {
                 showError("请选择文件。");
             }
+            String fileName = imgFile.FileName;
+            String fileExt = Path.GetExtension(fileName).ToLower();
 
             String dirPath = context.Server.MapPath(savePath);
+            string key = null;
+            foreach (System.Collections.DictionaryEntry de in extTable)
+            {
+                if (Array.IndexOf(de.Value.ToString().Split(','), fileExt.Substring(1).ToLower()) != -1)
+                {
+                    key = de.Key.ToString();//得到key
+                    break;//退出foreach遍历
+                }
+            }
             if (!Directory.Exists(dirPath))
             {
                 showError("上传目录不存在。");
             }
 
-            String dirName = context.Request.QueryString["dir"];
+            String dirName = key;
             if (String.IsNullOrEmpty(dirName))
             {
-                dirName = "image";
+                dirName = "file";
             }
             if (!extTable.ContainsKey(dirName))
             {
                 showError("目录名不正确。");
             }
 
-            String fileName = imgFile.FileName;
-            String fileExt = Path.GetExtension(fileName).ToLower();
+            
 
             if (imgFile.InputStream == null || imgFile.InputStream.Length > maxSize)
             {
@@ -96,7 +106,11 @@ namespace AchieveManageWeb
 
             Hashtable hash = new Hashtable();
             hash["error"] = 0;
-            hash["url"] = fileUrl;
+            hash["status"] = true;
+            hash["message"] = "上传成功";
+            hash["F_FileUrl"] = fileUrl.Substring(1);
+            hash["F_FileName"] = fileName;
+            hash["F_FileType"] = dirName;
             context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
             context.Response.Write(JsonMapper.ToJson(hash));
             context.Response.End();
@@ -106,6 +120,7 @@ namespace AchieveManageWeb
         {
             Hashtable hash = new Hashtable();
             hash["error"] = 1;
+            hash["status"] = false;
             hash["message"] = message;
             context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
             context.Response.Write(JsonMapper.ToJson(hash));

@@ -60,6 +60,7 @@
     <Compile Include="Sys_Role.cs" />
     <Compile Include="Sys_User.cs" />
     <Compile Include="Sys_UserLogOn.cs" />
+    <Compile Include="Sys_File.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

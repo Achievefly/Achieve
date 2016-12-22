@@ -62,6 +62,7 @@
     <Compile Include="Sys_ModuleButtonDAL.cs" />
     <Compile Include="Sys_RoleAuthorizeDAL.cs" />
     <Compile Include="Sys_LogDAL.cs" />
+    <Compile Include="Sys_FileDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Entity\AchieveEntity\AchieveEntity.csproj">
