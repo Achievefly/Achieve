@@ -7,13 +7,13 @@
         gridList();
     })
     $(window).resize(function () {
-        $.resize("gridList",128);
+        $.resize("gridList",205);
     });
     function gridList() {
         var $gridList = $("#gridList");
         $gridList.dataGrid({
             url: "/SystemManage/User/GetGridJson",
-            height: $(window).height() - 128,
+            height: $(window).height() - 138,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
                 { label: '账户', name: 'F_Account', width: 80, align: 'left' },

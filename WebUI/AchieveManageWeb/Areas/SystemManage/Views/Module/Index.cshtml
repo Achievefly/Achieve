@@ -7,7 +7,7 @@
         gridList();
     })
     $(window).resize(function () {
-        $.resize("gridList", 96);
+        $.resize("gridList", 182);
     });
     function gridList() {
         var $gridList = $("#gridList");
@@ -16,7 +16,7 @@
             treeGridModel: "adjacency",
             ExpandColumn: "F_UrlAddress",
             url: "/SystemManage/Module/GetTreeGridJson",
-            height: $(window).height() - 96,
+            height: $(window).height() - 112,
             colModel: [
                 { label: "主键", name: "F_Id", hidden: true, key: true },
                 { label: '名称', name: 'F_FullName', width: 200, align: 'left' },

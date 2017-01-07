@@ -1,178 +1,508 @@
 ﻿<!DOCTYPE html>
-<html style="overflow: hidden;">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>NFine快速开发平台</title>
-    <link href="~/Content/NFineUI/css/framework-font.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>公共后台管理系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/plugins/tab/css/style.min.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/css/AdminLTE.css" rel="stylesheet" />
+    <link href="~/Content/NFineUI/css/skins/skin-blue.css" rel="stylesheet" />
+    <style type="text/css">
+        body,
+        body.full-height-layout div.wrapper,
+        html {
+            height: 100%;
+        }
+
+            body.full-height-layout div.content-wrapper {
+                height: calc(100% - 50px);
+            }
+
+            body.full-height-layout div#J_mainContent {
+                height: calc(100% - 16px);
+            }
+            #loadingPage .loading-shade {cursor: wait; display: block; width: 100%; height: 100%; opacity: 0.0; filter: alpha(opacity=00); background: #fff; position: absolute; top: 0; left: 0; z-index: 100009;}
+            #loadingPage .loading-content {cursor: default; position: absolute; z-index: 100019; width: auto; border: 1px solid rgb(187, 187, 187); height: 80px; line-height: 80px; padding-left: 80px; padding-right: 20px; border-radius: 10px; color: rgb(102, 102, 102); font-size: 20px; left: 0px; top: 0px; background: url(../Content/NFineUI/img/loading.gif) 5px 50% no-repeat rgb(255, 255, 255);box-shadow: 0 1px 15px rgba(0,0,0,.175);}
+    </style>
     <script src="~/Content/NFineUI/js/jquery/jquery-2.1.1.min.js"></script>
     <script src="~/Content/NFineUI/js/bootstrap/bootstrap.js"></script>
-    <link href="~/Content/NFineUI/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    @*<script src="~/Content/NFineUI/plugins/tab/js/contabs.js"></script>
+    <script src="~/Content/NFineUI/plugins/tab/js/indextab.js"></script>*@
     <script src="~/Content/NFineUI/js/dialog/dialog.js"></script>
     <script src="~/Content/NFineUI/js/cookie/jquery.cookie.js"></script>
-    <link href="~/Content/NFineUI/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/NFineUI/js/app.js"></script>
     <script src="~/Content/NFineUI/js/framework-ui.js"></script>
     <script src="~/Content/NFineUI/js/framework-clientdata.js"></script>
-</head>
-<body style="overflow: hidden;">
-    <div id="ajax-loader" style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
-        <img src="~/Content/NFineUI/img/ajax-loader.gif" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;" />
-    </div>
-    <div id="theme-wrapper">
-        <header class="navbar" id="header-navbar">
-            <div class="container" style="padding-right: 0px;">
-                <a href="#" id="logo" class="navbar-brand">NFine开发平台</a>
-                <div class="clearfix">
-                    <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
-                        <ul class="nav navbar-nav pull-left">
-                            <li>
-                                <a class="btn" id="make-small-nav"><i class="fa fa-bars"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="nav-no-collapse pull-right" id="header-nav">
-                        <ul class="nav navbar-nav pull-right">
-                            <li class="mobile-search">
-                                <a class="btn">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                                <div class="drowdown-search">
-                                    <form role="search">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                            <i class="fa fa-search nav-search-icon"></i>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="dropdown hidden-xs">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-tasks"></i>
-                                    <span class="count">5</span>
-                                </a>
-                            </li>
-                            <li class="dropdown hidden-xs">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell"></i>
-                                    <span class="count">8</span>
-                                </a>
-                            </li>
+    <script src="~/Content/NFineUI/plugins/tab/js/contabs.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(window).load(function () {
+                window.setTimeout(function () {
+                    $('#ajax-loader').fadeOut();
+                }, 300);
+            });
+            tabnav();
 
-                            <li class="dropdown hidden-xs">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="count">16</span>
-                                </a>
-                            </li>
-                            <li class="dropdown profile-dropdown">
-                                <a href="#" class="dropdown" data-toggle="dropdown">
-                                    <img src="~/Content/NFineUI/img/samples/scarlet-159.png" alt="" />
-                                    <span class="hidden-xs">@AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserCode</span>
-                                </a>
-                                <ul class="dropdown-menu pull-right animated fadeInRight">
-                                    <li><a class="menuItem" data-id="userInfo" href="/SystemManage/User/Info"><i class="fa fa-user"></i>个人信息</a></li>
-                                    <li><a href="javascript:void();"><i class="fa fa-inbox"></i>我的信箱</a></li>
-                                    <li><a href="javascript:void();" onclick="layer.msg('浏览器缓存清除成功');"><i class="fa fa-trash-o"></i>清空缓存</a></li>
-                                    <li><a href="javascript:void();"><i class="fa fa-paint-brush"></i>皮肤设置</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="~/Login/UserLoginOut"><i class="ace-icon fa fa-power-off"></i>安全退出</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div id="page-wrapper" class="container">
-            <div class="row">
-                <div id="nav-col">
-                    <section id="col-left" class="col-left-nano">
-                        <div id="col-left-inner" class="col-left-nano-content">
-                            <div id="user-left-box" class="clearfix hidden-sm hidden-xs dropdown profile2-dropdown">
-                                <img alt="" src="~/Content/NFineUI/img/samples/scarlet-159.png" />
-                                <div class="user-box">
-                                    <span class="name">
-                                        @AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserCode
-                                    </span>
-                                    <span class="status">
-                                        <i class="fa fa-circle"></i>在线
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li class="nav-header hidden-sm hidden-xs">常用菜单
-                                        <i class="fa fa-gear" style="color: #868b98; font-size: 12px; margin-top: -6px; position: absolute; right: 23px; top: 50%; cursor: pointer;"></i>
-                                    </li>
-                                    <li class="common">
-                                        <a href="#">
-                                            <i class="fa fa-star-o"></i>
-                                            <span>联系人</span>
-                                        </a>
-                                    </li>
-                                    <li class="common">
-                                        <a href="#">
-                                            <i class="fa fa-star-o"></i>
-                                            <span>合同</span>
-                                        </a>
-                                    </li>
-                                    <li class="common">
-                                        <a href="maps.html">
-                                            <i class="fa fa-star-o"></i>
-                                            <span>产品</span>
-                                        </a>
-                                    </li>
-                                    <li class="common">
-                                        <a href="#">
-                                            <i class="fa fa-star-o"></i>
-                                            <span>客户</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <div id="content-wrapper">
-                    <div class="content-tabs">
-                        <button class="roll-nav roll-left tabLeft">
-                            <i class="fa fa-backward"></i>
-                        </button>
-                        <nav class="page-tabs menuTabs">
-                            <div class="page-tabs-content" style="margin-left: 0px;">
-                                <a href="javascript:;" class="menuTab active" data-id="/Home/About" style="padding-right: 15px;">平台介绍</a>
-                            </div>
-                        </nav>
-                        <button class="roll-nav roll-right tabRight">
-                            <i class="fa fa-forward" style="margin-left: 3px;"></i>
-                        </button>
-                        <div class="btn-group roll-nav roll-right">
-                            <button class="dropdown tabClose" data-toggle="dropdown">
-                                页签操作<i class="fa fa-caret-down" style="padding-left: 3px;"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a class="tabReload" href="javascript:void();">刷新当前</a></li>
-                                <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
-                                <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
-                                <li><a class="tabCloseOther" href="javascript:void();">除此之外全部关闭</a></li>
-                            </ul>
-                        </div>
-                        <button class="roll-nav roll-right fullscreen"><i class="fa fa-arrows-alt"></i></button>
-                    </div>
-                    <div class="content-iframe" style="background-color: #f9f9f9; overflow: hidden;">
-                        <div class="mainContent" id="content-main" style="margin: 10px; margin-bottom: 0px; padding: 0;">
-                            <iframe class="NFine_iframe" width="100%" height="100%" src="/Home/About" frameborder="0" data-id="/Home/About"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        });
+        $(document).resize(function () {
+            tabnav();
+        });
+        function tabnav() {
+            $(".sidebar-menu li").on("click", function () {
+                var _heigth = $(".wrapper").height() - $(".main-header").height() - $(".user-panel").height();
+                var otherheigth = $(".treeview").length * $(this).height();
+                $(this).find("ul").height(_heigth - otherheigth - 20);
+                $(this).find("ul").css("overflow", "auto");
+            });
+        }
+        
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini full-height-layout">
     <div id="loadingPage" style="display: none;">
         <div class="loading-shade"></div>
         <div class="loading-content" onclick="$.loading(false)">数据加载中，请稍后…</div>
     </div>
-    <script src="~/Content/NFineUI/js/index.js"></script>
-    <script src="~/Content/NFineUI/js/indextab.js"></script>
-    <script src="~/Content/NFineUI/js/loading/pace.min.js"></script>
+    <div id="ajax-loader" style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
+        <img src="~/Content/NFineUI/img/ajax-loader.gif" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;" />
+    </div>
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="/system/home" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>A</b>LT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b>LTE</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 4 messages</li>
+                                <li>
+                                    <!-- inner menu: contains the messages -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <!-- User Image -->
+                                                    <img src="Content/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                                </div>
+                                                <!-- Message title and timestamp -->
+                                                <h4>
+                                                    Support Team
+
+                                                    <small><i class="fa fa-clock-o"></i>5 mins</small>
+                                                </h4>
+                                                <!-- The message -->
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                    </ul>
+                                    <!-- /.menu -->
+                                </li>
+                                <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
+                        </li>
+                        <!-- /.messages-menu -->
+                        <!-- Notifications Menu -->
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <!-- Inner Menu: contains the notifications -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start notification -->
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i>5 new members joined today
+                                            </a>
+                                        </li>
+                                        <!-- end notification -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+                        <!-- Tasks Menu -->
+                        <li class="dropdown tasks-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-flag-o"></i>
+                                <span class="label label-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 9 tasks</li>
+                                <li>
+                                    <!-- Inner menu: contains the tasks -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <!-- Task title and progress text -->
+                                                <h3>
+                                                    Design some buttons
+
+                                                    <small class="pull-right">20%</small>
+                                                </h3>
+                                                <!-- The progress bar -->
+                                                <div class="progress xs">
+                                                    <!-- Change the css width attribute to simulate progress -->
+                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">20% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    </ul>
+                                </li>
+                                <li class="footer">
+                                    <a href="#">View all tasks</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="content/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">Alexander Pierce</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="content/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        Alexander Pierce - Web Developer
+
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="content/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>Admin</p>
+                        <!-- Status -->
+                        <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+                    </div>
+                </div>
+                <!-- search form (Optional) -->
+                <!--<form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>-->
+                <!-- /.search form -->
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+                    <!--<li class="header">HEADER</li>-->
+                    <!-- Optionally, you can add icons to the links -->
+                    @*<li class="treeview">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-link"></i><span>生成实体</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-link"></i><span>生成实体</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-link"></i><span>生成实体</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="https://www.baidu.com" data-iframe="true">百度</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.qq.com" data-iframe="true">腾讯</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.jd.com" data-iframe="true">京东</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" data-content="content-info" href="http://www.taobao.com" data-iframe="true">淘宝</a>
+                            </li>
+                        </ul>
+                    </li>*@
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div id="J_mainTabs" class="row content-tabs" style="margin-top: -15px;">
+                    <button class="roll-nav roll-left J_tabLeft">
+                        <i class="fa fa-backward"></i>
+                    </button>
+                    <nav class="page-tabs J_menuTabs">
+                        <div class="page-tabs-content">
+                            <a href="/Home/About" class="active J_menuTab content-main">首页</a>
+                        </div>
+                    </nav>
+                    <button class="roll-nav roll-right J_tabRight">
+                        <i class="fa fa-forward"></i>
+                    </button>
+                    <div class="btn-group roll-nav roll-right">
+                        <button class="dropdown J_tabClose" data-toggle="dropdown">
+                            页面操作<span class="caret"></span>
+                        </button>
+                        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                            <li class="J_tabReloadCurrent"><a>刷新当前</a></li>
+                            <li class="J_tabCloseCurrent"><a>关闭当前</a></li>
+                            <li class="J_tabCloseAll"><a>全部关闭</a></li>
+                            <li class="J_tabCloseOther"><a>除此之外全部关闭</a></li>
+                        </ul>
+                    </div>
+                    <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i>Exit</a>
+                </div>
+            </section>
+
+            <section class="content">
+                <div id="J_mainContent" class="J_mainContent">
+                    <iframe class="J_content active content-main" width="100%" height="100%" frameborder="0" src="/Home/About" seamless="" data-title="首页"></iframe>
+                </div>
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <!--<footer class="main-footer">
+            <div class="pull-right hidden-xs">
+            </div>
+            <strong>Copyright &copy; 2016 <a href="javascript:void(0)">Roc</a>.</strong> All rights reserved.
+
+        </footer>-->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane active" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Custom Template Design
+
+                                    <span class="pull-right-container">
+                                        <span class="label label-danger pull-right">70%</span>
+                                    </span>
+                                </h4>
+
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+
+                </div>
+                <!-- /.tab-pane -->
+                <!-- Stats tab content -->
+                <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+                <!-- /.tab-pane -->
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">General Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Report panel usage
+
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+
+                            <p>
+                                Some information about this general settings option
+
+                            </p>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+        
+    </div>
 </body>
 </html>

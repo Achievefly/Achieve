@@ -183,16 +183,18 @@ function btn_details(table, id, title, url, formurl, width, height) {
 }
 
 //普通的打开指定窗口
-function btn_open(table, id, title, url, width, height) {
+function btn_open(table, id, title, url, width, height,one) {
     var keyValue = $("#gridList").jqGridRowValue().F_Id;
-    if (keyValue == null || keyValue == "") {
-        top.layer.alert("请选择一行数据", {
-            icon: "fa-exclamation-circle",
-            title: "系统提示",
-            btn: ['确认'],
-            btnclass: ['btn btn-primary'],
-        });
-        return false;
+    if (one=="true") {
+        if (keyValue == null || keyValue == "") {
+            top.layer.alert("请选择一行数据", {
+                icon: "fa-exclamation-circle",
+                title: "系统提示",
+                btn: ['确认'],
+                btnclass: ['btn btn-primary'],
+            });
+            return false;
+        }
     }
     $.modalOpen({
         id: id,

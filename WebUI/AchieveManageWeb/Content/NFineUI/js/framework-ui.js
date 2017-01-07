@@ -1,10 +1,10 @@
 ﻿$(function () {
-    document.body.className = localStorage.getItem('config-skin');
-    $("[data-toggle='tooltip']").tooltip();
+    //document.body.className = localStorage.getItem('config-skin');
+    //$("[data-toggle='tooltip']").tooltip();
 })
 $.resize = function (name,heigth) {
     $(window).unbind("onresize");
-    $("#" + name).setGridHeight($(window).height() - heigth);
+    $("#" + name).setGridHeight(top.$(".wrapper").height() - heigth);
     $("#" + name).setGridWidth($(window).width());
     $(window).bind("onresize", this);
 }
@@ -47,7 +47,7 @@ $.request = function (name) {
 }
 $.currentWindow = function () {
     var iframeId = top.$(".NFine_iframe:visible").attr("id");
-    return top.frames[iframeId];
+    return top.frames[iframeId].contentWindow;
 }
 $.browser = function () {
     var userAgent = navigator.userAgent;
@@ -235,6 +235,7 @@ $.submitForm = function (options) {
             type: "post",
             dataType: "json",
             success: function (data) {
+                $.loading(false);
                 if (data.state == "success") {
                     options.success(data);
                     $.modalMsg(data.message, data.state);

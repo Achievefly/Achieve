@@ -61,6 +61,8 @@
             param: postData,
             success: function () {
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
+                //console.log($.currentWindow().contentWindow);
+                
             }
         });
     }
