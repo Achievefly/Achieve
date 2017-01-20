@@ -378,7 +378,6 @@
     <Content Include="Content\NFineUI\js\jquery-ui\jquery-ui.min.js" />
     <Content Include="Content\NFineUI\js\jquery\jquery-2.1.1.min.js" />
     <Content Include="Content\NFineUI\js\layer\extend\layer.ext.js" />
-    <Content Include="Content\NFineUI\js\layer\laydate-v1.1\demo.html" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\laydate.js" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\need\laydate.css" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\skins\dahong\icon.png" />
@@ -387,7 +386,6 @@
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\skins\default\laydate.css" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\skins\molv\icon.png" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1\laydate\skins\molv\laydate.css" />
-    <Content Include="Content\NFineUI\js\layer\laydate-v1.1\更新日志.txt" />
     <Content Include="Content\NFineUI\js\layer\laydate\laydate.js" />
     <Content Include="Content\NFineUI\js\layer\laydate\need\laydate.css" />
     <Content Include="Content\NFineUI\js\layer\laydate\skins\dahong\icon.png" />
@@ -2241,7 +2239,6 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\themes\bootstrap\images\Thumbs.db" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Config\log4net.config" />
@@ -2320,7 +2317,6 @@
     <Content Include="Areas\ReportManage\Views\Highcharts\Sample9.cshtml" />
     <Content Include="Areas\ReportManage\Views\Web.config" />
     <Content Include="Content\NFineUI\js\layer\laydate-v1.1.zip" />
-    <Content Include="Content\NFineUI\js\layer\laydate-v1.1\layDate官网.url" />
     <Content Include="Areas\SystemSecurity\Views\Log\Details.cshtml" />
     <Content Include="Areas\SystemManage\Views\Area\Details.cshtml" />
     <Content Include="Areas\ExampleManage\Views\File\Index.cshtml" />
@@ -2388,7 +2384,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="upload_json.ashx" />
     <Content Include="file_manager_json.ashx" />
@@ -2398,6 +2393,7 @@
     </Content>
     <Content Include="Views\Shared\_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
