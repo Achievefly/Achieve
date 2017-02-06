@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+@*<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignalR Simple Chat</title>  
+    <meta charset="utf-8" />  
+    <style type="text/css">  
+        .container{  
+            background-color:#99CCFF;  
+            border:thick solid #808080;  
+            padding:20px;  
+            margin:20px;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <input type="text" id="message" />  
+        <input type="button" id="sendmessage" value="send" />  
+        <input type="hidden" id="displayname"/>  
+        <ul id="discussion">  
+        </ul>  
+    </div>  
+    <script src="~/Scripts/jquery-1.6.4.min.js"></script>  
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>  
+    <script src="~/signalr/hubs"></script>  
+    <script>
+        $(function () {
+            //声明hub代理  
+            var chat = $.connection.chatHub;
+            //创建hub调用的broadcast函数  
+            chat.client.broadcastMessage = function (name, message) {
+                //获得发送人的名字和消息  
+                var encodedName = $('<div/>').text(name).html();
+                var encodedMsg = $('<div/>').text(message).html();
+                //将接收的信息添加到页面上  
+                $('#discussion').append('<li><strong>' + encodedName
+                    + '</strong>:  ' + encodedMsg + '</li>');
+            };
+            //获得当前用户的名字  
+            $('#displayname').val(prompt('Enter your name:', ''));
+            //将焦点设置在信息框  
+            $('#message').focus();
+            //启动链接  
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    //调用hub的Send方法  
+                    chat.server.send($('#displayname').val(), $('#message').val());
+                    //清理输入框，并将焦点重新设置在输入框中  
+                    $('#message').val('').focus();
+                });
+            });
+        });
+    </script>  
+</body> *@ 
+    <head>
+    <link href="~/Scripts/layim/css/font.css" rel="stylesheet" />
+    <link href="~/Scripts/layim/css/layim.css" rel="stylesheet" />
+    <style>
+        .comment{width:680px; margin:20px auto; position:relative}
+.comment h3{height:28px; line-height:28px}
+.com_form{width:100%; position:relative}
+.input{width:99%; height:60px; border:1px solid #ccc}
+.com_form p{height:28px; line-height:28px; position:relative}
+span.emotion{width:42px; height:20px; background:url(icon.gif) no-repeat 2px 2px; padding-left:20px; cursor:pointer}
+span.emotion:hover{background-position:2px -28px}
+.qqFace{margin-top:4px;background:#fff;padding:2px;border:1px #dfe6f6 solid;}
+.qqFace table td{padding:0px;}
+.qqFace table td img{cursor:pointer;border:1px #fff solid;}
+.qqFace table td img:hover{border:1px #0066cc solid;}
+#show{width:680px; margin:20px auto}
+
+    </style>
+</head>
+<body>
+    <script src="~/Content/NFineUI/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/cs/hubs"></script>
+    <script src="~/Scripts/qq/jquery.qqFace.js"></script>
+    <script src="~/Scripts/singalr/client.hub.js"></script>
+    <script>
+        var hubConfig = {
+            currentUser: {},
+            serverUrl: 'http://localhost:12345/cs'
+        };
+        $(function () {
+            $(document).qq
+            csClient.init({
+                serverUrl: hubConfig.serverUrl
+            });
+
+            var oldUrl = "http://univ.gurucv.com/gurucv/index?pageExperSee?id=1454236712103&key=b05983ccab0efa4e6be1a69e3058b203";
+            oldUrl = oldUrl.substr(0, oldUrl.indexOf('key=') - 1);
+            if (oldUrl.indexOf('?') > -1) {
+                oldUrl = oldUrl + '&key=1111111111111111111111111111';
+            } else {
+                oldUrl = oldUrl + '?key=22222222222222222222222222222';
+            }
+        });
+
+        /*
+        获取随机一个用户
+        当用户第一次登陆就获取，然后存到本地localStorage中模拟用户，之后再登录就直接从缓存里面取
+        */
+        function getRandomUser() {
+            var userKey = "SIGNALR_USER";
+            var user = local.get(userKey);
+            if (user) { return JSON.parse(user); }
+            var userids = [];
+            var usernames = ["痴玉", "书筠", "诗冬", "飞枫", "盼玉", "靖菡", "宛雁", "之卉", "凡晴", "书枫", "沛梦"];
+            var userphotos = [];
+            //添加id，用户头像数组
+            for (var i = 0; i < 9; i++) {
+                userids.push(10000 + i);
+                userphotos.push("/photos/00" + i.toString() + ".jpg");
+            }
+            //取一个random值，自动生成当前用户
+            var random = Math.random().toString().substr(3, 1);
+            if (random > 8) { random = 8; }
+            var user = {
+                name: usernames[random],
+                photo: userphotos[random],
+                id: userids[random]
+            };
+            local.set(userKey, JSON.stringify(user));
+            return user;
+        }
+        /*本地存储*/
+        var local = {
+            get: function (key) {
+                return localStorage.getItem(key);
+            },
+            set: function (key, value) {
+                localStorage.setItem(key, value);
+            }
+        }
+
+        function replace_em(str) {
+            str = str.replace(/\</g, '&lt;');
+            str = str.replace(/\>/g, '&gt;');
+            str = str.replace(/\n/g, '<br/>');
+            str = str.replace(/\[em_([0-9]*)\]/g, '<img src="/scripts/qq/face/$1.gif" border="0" />');
+            return str;
+        }
+    </script>
+    <script src="~/Scripts/layim/layer.min.js"></script>
+    <script src="~/Scripts/layim/layim.js"></script>
+</body>
+</html>

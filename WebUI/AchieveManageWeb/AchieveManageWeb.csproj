@@ -57,7 +57,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -77,6 +97,10 @@
     <Reference Include="NPOI.OpenXmlFormats, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -165,6 +189,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apis\getdata.ashx.cs">
+      <DependentUpon>getdata.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="apis\getdataWebService.asmx.cs">
+      <DependentUpon>getdataWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\Attribute\BaseHandleErrorAttribute.cs" />
     <Compile Include="App_Start\Attribute\HandlerAjaxOnlyAttribute.cs" />
     <Compile Include="App_Start\Attribute\RequireHttpsAttribute.cs" />
@@ -176,6 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\FileController.cs" />
+    <Compile Include="Areas\ExampleManage\Controllers\LayMiController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
@@ -200,6 +232,9 @@
     <Compile Include="Areas\SystemSecurity\Controllers\LogController.cs" />
     <Compile Include="Areas\SystemSecurity\Controllers\ServerMonitoringController.cs" />
     <Compile Include="Areas\SystemSecurity\SystemSecurityAreaRegistration.cs" />
+    <Compile Include="BLL\DBHelper.cs" />
+    <Compile Include="BLL\MessageConfig.cs" />
+    <Compile Include="BLL\MessageUtils.cs" />
     <Compile Include="Content\NFineUI\js\uploadify\net\uploadify.ashx.cs">
       <DependentUpon>uploadify.ashx</DependentUpon>
     </Compile>
@@ -209,17 +244,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hub\CustomServiceHub.cs" />
     <Compile Include="Models\ActionFilters\LoggerHelper.cs" />
     <Compile Include="Models\ActionFilters\StatisticsTrackerAttribute.cs" />
+    <Compile Include="Models\CSChatMessage.cs" />
+    <Compile Include="Models\CSFriend.cs" />
+    <Compile Include="Models\CSGroup.cs" />
+    <Compile Include="Models\CSMessageType.cs" />
+    <Compile Include="Models\CSResult.cs" />
+    <Compile Include="Models\CSUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="file_manager_json.ashx.cs">
       <DependentUpon>file_manager_json.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="upload_json.ashx.cs">
       <DependentUpon>upload_json.ashx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="apis\getdataWebService.asmx" />
     <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -2340,6 +2384,8 @@
     <Content Include="Content\NFineUI\js\layer\layui\font\iconfont.ttf" />
     <Content Include="Content\NFineUI\js\layer\layui\font\iconfont.woff" />
     <Content Include="Content\NFineUI\plugins\layer\mobile\README.md" />
+    <Content Include="Areas\ExampleManage\Views\LayMi\Index.cshtml" />
+    <Content Include="apis\getdata.ashx" />
     <None Include="Properties\PublishProfiles\soulefu_manage_test.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Library\ICSharpCode.SharpZipLib.dll" />
@@ -2356,11 +2402,28 @@
     <Content Include="Library\SqlSugarRepository.dll" />
     <Content Include="Library\System.Data.SQLite.dll" />
     <Content Include="Library\Webdiyer.MvcPager.dll" />
+    <Content Include="photos\000.jpg" />
+    <Content Include="photos\001.jpg" />
+    <Content Include="photos\002.jpg" />
+    <Content Include="photos\003.jpg" />
+    <Content Include="photos\004.jpg" />
+    <Content Include="photos\005.jpg" />
+    <Content Include="photos\006.jpg" />
+    <Content Include="photos\007.jpg" />
+    <Content Include="photos\008.jpg" />
+    <Content Include="photos\009.jpg" />
+    <Content Include="photos\010.jpg" />
+    <Content Include="photos\011.jpg" />
+    <Content Include="photos\012.jpg" />
+    <Content Include="photos\sys.png" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -2369,7 +2432,91 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\layim\css\font.css" />
+    <Content Include="Scripts\layim\css\layim.css" />
+    <Content Include="Scripts\layim\layer.min.js" />
+    <Content Include="Scripts\layim\layim.js" />
+    <Content Include="Scripts\layim\loading.gif" />
+    <Content Include="Scripts\layim\skin\layer.css" />
+    <Content Include="Scripts\layim\skin\xubox_ico0.png" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\qq\face\1.gif" />
+    <Content Include="Scripts\qq\face\10.gif" />
+    <Content Include="Scripts\qq\face\11.gif" />
+    <Content Include="Scripts\qq\face\12.gif" />
+    <Content Include="Scripts\qq\face\13.gif" />
+    <Content Include="Scripts\qq\face\14.gif" />
+    <Content Include="Scripts\qq\face\15.gif" />
+    <Content Include="Scripts\qq\face\16.gif" />
+    <Content Include="Scripts\qq\face\17.gif" />
+    <Content Include="Scripts\qq\face\18.gif" />
+    <Content Include="Scripts\qq\face\19.gif" />
+    <Content Include="Scripts\qq\face\2.gif" />
+    <Content Include="Scripts\qq\face\20.gif" />
+    <Content Include="Scripts\qq\face\21.gif" />
+    <Content Include="Scripts\qq\face\22.gif" />
+    <Content Include="Scripts\qq\face\23.gif" />
+    <Content Include="Scripts\qq\face\24.gif" />
+    <Content Include="Scripts\qq\face\25.gif" />
+    <Content Include="Scripts\qq\face\26.gif" />
+    <Content Include="Scripts\qq\face\27.gif" />
+    <Content Include="Scripts\qq\face\28.gif" />
+    <Content Include="Scripts\qq\face\29.gif" />
+    <Content Include="Scripts\qq\face\3.gif" />
+    <Content Include="Scripts\qq\face\30.gif" />
+    <Content Include="Scripts\qq\face\31.gif" />
+    <Content Include="Scripts\qq\face\32.gif" />
+    <Content Include="Scripts\qq\face\33.gif" />
+    <Content Include="Scripts\qq\face\34.gif" />
+    <Content Include="Scripts\qq\face\35.gif" />
+    <Content Include="Scripts\qq\face\36.gif" />
+    <Content Include="Scripts\qq\face\37.gif" />
+    <Content Include="Scripts\qq\face\38.gif" />
+    <Content Include="Scripts\qq\face\39.gif" />
+    <Content Include="Scripts\qq\face\4.gif" />
+    <Content Include="Scripts\qq\face\40.gif" />
+    <Content Include="Scripts\qq\face\41.gif" />
+    <Content Include="Scripts\qq\face\42.gif" />
+    <Content Include="Scripts\qq\face\43.gif" />
+    <Content Include="Scripts\qq\face\44.gif" />
+    <Content Include="Scripts\qq\face\45.gif" />
+    <Content Include="Scripts\qq\face\46.gif" />
+    <Content Include="Scripts\qq\face\47.gif" />
+    <Content Include="Scripts\qq\face\48.gif" />
+    <Content Include="Scripts\qq\face\49.gif" />
+    <Content Include="Scripts\qq\face\5.gif" />
+    <Content Include="Scripts\qq\face\50.gif" />
+    <Content Include="Scripts\qq\face\51.gif" />
+    <Content Include="Scripts\qq\face\52.gif" />
+    <Content Include="Scripts\qq\face\53.gif" />
+    <Content Include="Scripts\qq\face\54.gif" />
+    <Content Include="Scripts\qq\face\55.gif" />
+    <Content Include="Scripts\qq\face\56.gif" />
+    <Content Include="Scripts\qq\face\57.gif" />
+    <Content Include="Scripts\qq\face\58.gif" />
+    <Content Include="Scripts\qq\face\59.gif" />
+    <Content Include="Scripts\qq\face\6.gif" />
+    <Content Include="Scripts\qq\face\60.gif" />
+    <Content Include="Scripts\qq\face\61.gif" />
+    <Content Include="Scripts\qq\face\62.gif" />
+    <Content Include="Scripts\qq\face\63.gif" />
+    <Content Include="Scripts\qq\face\64.gif" />
+    <Content Include="Scripts\qq\face\65.gif" />
+    <Content Include="Scripts\qq\face\66.gif" />
+    <Content Include="Scripts\qq\face\67.gif" />
+    <Content Include="Scripts\qq\face\68.gif" />
+    <Content Include="Scripts\qq\face\69.gif" />
+    <Content Include="Scripts\qq\face\7.gif" />
+    <Content Include="Scripts\qq\face\70.gif" />
+    <Content Include="Scripts\qq\face\71.gif" />
+    <Content Include="Scripts\qq\face\72.gif" />
+    <Content Include="Scripts\qq\face\73.gif" />
+    <Content Include="Scripts\qq\face\74.gif" />
+    <Content Include="Scripts\qq\face\75.gif" />
+    <Content Include="Scripts\qq\face\8.gif" />
+    <Content Include="Scripts\qq\face\9.gif" />
+    <Content Include="Scripts\qq\jquery.qqFace.js" />
+    <Content Include="Scripts\singalr\client.hub.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2394,6 +2541,12 @@
     <Content Include="Views\Shared\_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Scripts\layim\chatlog.json" />
+    <Content Include="Scripts\layim\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\layim\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Scripts\layim\friend.json" />
+    <Content Include="Scripts\layim\group.json" />
+    <Content Include="Scripts\layim\groups.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
