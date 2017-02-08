@@ -11,6 +11,7 @@
     //////////////////////////////自动生成当前用户
     hubConfig.currentUser = getRandomUser();
     /////////////////////////////自动生成当前用户
+    var groupid = "";
     var config = {
         apitype:'json',//ws 如果是ws说明是webservice，那么就调用config.json_ws方法请求webservice
         msgurl: 'mailbox.html?msg=',
@@ -18,10 +19,10 @@
         aniTime: 200,
         right: -232,
         api: {
-            friend: '/apis/getdata.ashx?type=friend', //好友列表接口
-            group: '/apis/getdata.ashx?type=group', //群组列表接口
-            chatlog: '/apis/getdata.ashx?type=log', //聊天记录接口
-            groups: '/apis/getdata.ashx?type=groups', //群组成员接口
+            friend: '/ExampleManage/LayMi/GetData?type=friend', //好友列表接口
+            group: '/ExampleManage/LayMi/GetData?type=group', //群组列表接口
+            chatlog: '/ExampleManage/LayMi/GetData?type=log', //聊天记录接口
+            groups: '/ExampleManage/LayMi/GetData?type=groups', //群组成员接口
             sendurl: '' //发送消息接口
         },
         user: { //当前用户信息
@@ -380,7 +381,7 @@
         var keys = param.type + param.id, str = '',
         groupss = xxim.chatbox.find('#layim_group' + keys);
         groupss.addClass('loading');
-        config.json(config.api.groups, {}, function (datas) {
+        config.json(config.api.groups + "&groupid=" + groupid, {}, function (datas) {
             if (datas.status === 1) {
                 var ii = 0, lens = datas.data.length;
                 if (lens > 0) {
@@ -514,7 +515,7 @@
             var currentid = config.user.id;
             //取得被点击的用户id
             var receiveid = othis.data('id');
-           
+            groupid = receiveid;
             //调用signalR封装的方法，连接服务器，将发送人id，接收人id传给后台，当前用户加入组
             /*新改，由于区分单个聊天和群组聊天，所以这里将type传进去*/
             csClient.server.ctoc(currentid, receiveid, type);
@@ -626,35 +627,35 @@
     }());
 
 
-    //将currentUser公开到外部
-    var currentUser = config.user;
-    currentUser.getDatas = function (index) {
-        xxim.getDates(index);
-    }
-    currentUser.popChatBox = function (id, name, photo) {
+    ////将currentUser公开到外部
+    //var currentUser = config.user;
+    //currentUser.getDatas = function (index) {
+    //    xxim.getDates(index);
+    //}
+    //currentUser.popChatBox = function (id, name, photo) {
 
-           csClient.server.ctoc(config.user.id, id, 'one');
-            var node = xxim.node, dataId = othis.attr('data-id'), param = {
-                id: id, //用户ID
-                type:'one',
-                name: name,  //用户名
-                face: photo,  //用户头像
-                href: '/web/zhuanjiaxinxi.aspx?id='+id //用户主页
-            }, key = param.type + dataId;
-            if (!config.chating[key]) {
-                xxim.popchat(param);
-                config.chatings++;
-            } else {
-                xxim.tabchat(param);
-            }
-            config.chating[key] = param;
+    //       csClient.server.ctoc(config.user.id, id, 'one');
+    //        var node = xxim.node, dataId = othis.attr('data-id'), param = {
+    //            id: id, //用户ID
+    //            type:'one',
+    //            name: name,  //用户名
+    //            face: photo,  //用户头像
+    //            href: '/web/zhuanjiaxinxi.aspx?id='+id //用户主页
+    //        }, key = param.type + dataId;
+    //        if (!config.chating[key]) {
+    //            xxim.popchat(param);
+    //            config.chatings++;
+    //        } else {
+    //            xxim.tabchat(param);
+    //        }
+    //        config.chating[key] = param;
 
-            var chatbox = $('#layim_chatbox');
-            if (chatbox[0]) {
-                node.layimMin.hide();
-                chatbox.parents('.xubox_layer').show();
-            }
-    }
-    window.currentUser = currentUser;
+    //        var chatbox = $('#layim_chatbox');
+    //        if (chatbox[0]) {
+    //            node.layimMin.hide();
+    //            chatbox.parents('.xubox_layer').show();
+    //        }
+    //}
+    //window.currentUser = currentUser;
 }(window);
 

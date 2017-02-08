@@ -55,6 +55,7 @@
     <Compile Include="ISys_RoleAuthorizeDAL.cs" />
     <Compile Include="ISys_LogDAL.cs" />
     <Compile Include="ISys_FileDAL.cs" />
+    <Compile Include="ISys_LayimDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AchieveCommon\AchieveCommon.csproj">

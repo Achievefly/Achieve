@@ -104,5 +104,10 @@ namespace AchieveDALFactory
             ISys_FileDAL dal = GetInstance("Sys_FileDAL") as ISys_FileDAL;
             return dal;
         }
+        public static ISys_LayimDAL GetLayimDAL()
+        {
+            ISys_LayimDAL dal = GetInstance("Sys_LayimDAL") as ISys_LayimDAL;
+            return dal;
+        }
     }
 }

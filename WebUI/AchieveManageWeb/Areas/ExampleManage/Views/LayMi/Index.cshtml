@@ -78,6 +78,8 @@ span.emotion:hover{background-position:2px -28px}
     </style>
 </head>
 <body>
+    <input id="UserName" type="hidden" value="@AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserName" />
+    <input id="Userid" type="hidden" value="@AchieveCommon.Operator.OperatorProvider.Provider.GetCurrent().UserId" />
     <script src="~/Content/NFineUI/js/jquery/jquery-2.1.1.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
     <script src="~/cs/hubs"></script>
@@ -108,26 +110,26 @@ span.emotion:hover{background-position:2px -28px}
         当用户第一次登陆就获取，然后存到本地localStorage中模拟用户，之后再登录就直接从缓存里面取
         */
         function getRandomUser() {
-            var userKey = "SIGNALR_USER";
-            var user = local.get(userKey);
-            if (user) { return JSON.parse(user); }
-            var userids = [];
-            var usernames = ["痴玉", "书筠", "诗冬", "飞枫", "盼玉", "靖菡", "宛雁", "之卉", "凡晴", "书枫", "沛梦"];
-            var userphotos = [];
-            //添加id，用户头像数组
-            for (var i = 0; i < 9; i++) {
-                userids.push(10000 + i);
-                userphotos.push("/photos/00" + i.toString() + ".jpg");
-            }
-            //取一个random值，自动生成当前用户
-            var random = Math.random().toString().substr(3, 1);
-            if (random > 8) { random = 8; }
+            //var userKey = "SIGNALR_USER";
+            //var user = local.get(userKey);
+            //if (user) { return JSON.parse(user); }
+            //var userids = [];
+            ////var usernames = ["痴玉", "书筠", "诗冬", "飞枫", "盼玉", "靖菡", "宛雁", "之卉", "凡晴", "书枫", "沛梦"];
+            //var userphotos = [];
+            ////添加id，用户头像数组
+            //for (var i = 0; i < 9; i++) {
+            //    userids.push(10000 + i);
+            //    userphotos.push("/photos/00" + i.toString() + ".jpg");
+            //}
+            ////取一个random值，自动生成当前用户
+            //var random = Math.random().toString().substr(3, 1);
+            //if (random > 8) { random = 8; }
             var user = {
-                name: usernames[random],
-                photo: userphotos[random],
-                id: userids[random]
+                name: $("#UserName").val(),
+                photo: "",
+                id: $("#Userid").val()
             };
-            local.set(userKey, JSON.stringify(user));
+            //local.set(userKey, JSON.stringify(user));
             return user;
         }
         /*本地存储*/

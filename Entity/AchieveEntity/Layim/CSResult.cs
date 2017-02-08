@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AchieveManageWeb.Models
+namespace AchieveEntity
 {
     [Serializable]
     public class CSResult

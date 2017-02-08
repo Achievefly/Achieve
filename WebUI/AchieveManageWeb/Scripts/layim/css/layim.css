@@ -87,7 +87,7 @@ li{list-style:none;}
 .layim_rightbtn .layim_close{background: #FFA00A;color:#fff;}
 .layim_rightbtn .layim_close:hover{-webkit-transform: rotate(180deg); -moz-transform: rotate(180deg);}
 .layim_rightbtn .layer_setmin{margin-right:5px;color:#999;font-size:14px;font-weight: 700;}
-.layim_chat, .layim_chatmore,.layim_groups{height:450px; /*overflow:hidden;*/}
+.layim_chat, .layim_chatmore,.layim_groups{height:450px; overflow:hidden;}
 .layim_chatmore{display:none; float:left; width:135px; border-right:1px solid #BEBEBE; background-color:#F2F2F2}
 .layim_chatlist li, .layim_groups li{position:relative; height:30px; line-height:30px; padding:0 10px; overflow:hidden; text-overflow: ellipsis; white-space:nowrap; cursor:pointer;}
 .layim_chatlist li{padding:0 20px 0 10px;}

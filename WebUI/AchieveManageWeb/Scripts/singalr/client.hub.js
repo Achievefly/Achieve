@@ -176,7 +176,7 @@
                 + '</li>';
             };
             //上述代码还是layim里的代码，只不过拼接html的时候，参数采用signalR返回的参数
-            var type = result.fromuser.userid == currentUser.id ? "me" : "";//如果发送人的id==当前用户的id，那么这条消息类型为me
+            var type = result.fromuser.userid == hubConfig.currentUser.id ? "me" : "";//如果发送人的id==当前用户的id，那么这条消息类型为me
             //拼接html 直接调用layim里的代码
             log.imarea.append(log.html({
                 time: result.addtime,

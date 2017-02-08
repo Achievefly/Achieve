@@ -63,6 +63,7 @@
     <Compile Include="Sys_RoleAuthorizeDAL.cs" />
     <Compile Include="Sys_LogDAL.cs" />
     <Compile Include="Sys_FileDAL.cs" />
+    <Compile Include="Sys_LayimDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Entity\AchieveEntity\AchieveEntity.csproj">

@@ -32,7 +32,7 @@
 			}
 			$(this).parent().append(strFace);
 			var offset = $(this).position();
-			var top = offset.top + $(this).outerHeight();
+			var top = offset.top - $(this).outerHeight() - 35;
 			$('#'+id).css('top',top);
 			$('#'+id).css('left',offset.left);
 			$('#'+id).show();

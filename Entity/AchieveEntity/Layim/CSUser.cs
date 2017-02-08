@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AchieveManageWeb.Models
+namespace AchieveEntity
 {
     public class SingalRUser
     {
@@ -48,7 +48,7 @@ namespace AchieveManageWeb.Models
         /// <summary>
         /// 用户id
         /// </summary>
-        public int userid { get; set; }
+        public string userid { get; set; }
         /// <summary>
         /// 用户昵称
         /// </summary>

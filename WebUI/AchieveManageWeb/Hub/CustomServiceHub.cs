@@ -5,8 +5,11 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System.Threading.Tasks;
-using AchieveManageWeb.BLL;
 using AchieveManageWeb.Models;
+using AchieveEntity;
+using AchieveCommon.Operator;
+using AchieveBLL;
+using AchieveCommon;
 
 namespace AchieveManageWeb
 {
@@ -45,7 +48,7 @@ namespace AchieveManageWeb
             //读取历史记录 --- 2016-3-7 修改
             var historyMsg = MessageUtils.GetHistoryMessage(sendid, receiveid);
 
-            var msg = MessageUtils.GetSystemMessage(groupName, MessageConfig.ClientToClientConnectedSucceed, new { t = MessageConfig.ClientTypeCTC, currentid = sendid, receiveid = receiveid,history = historyMsg });
+            var msg = MessageUtils.GetSystemMessage(groupName, "连接成功", new { t = "one", currentid = sendid, receiveid = receiveid,history = historyMsg });
             //将消息推送到当前组 （A和B聊天的组） 同样调用receiveMessage方法
            
             return Clients.Caller.receiveMessage(msg);
@@ -63,7 +66,7 @@ namespace AchieveManageWeb
             string groupName = MessageUtils.GetGroupName(groupid);
             Groups.Add(CurrentUserConnectionId, groupName);
             //构建系统连接成功消息
-            var msg = MessageUtils.GetSystemMessage(groupName, MessageConfig.ClientToGroupConnectedSucceed, new { t = MessageConfig.ClientTypeCTG, currentid = sendid, receiveid = groupid });
+            var msg = MessageUtils.GetSystemMessage(groupName, "链接成功", new { t = "group", currentid = sendid, receiveid = groupid });
             //将消息推送到当前组 （A和B聊天的组） 同样调用receiveMessage方法
             return Clients.Caller.receiveMessage(msg);
         }
@@ -73,14 +76,24 @@ namespace AchieveManageWeb
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task ClientSendMsgToClient(CSChatMessage msg)
+        public Task ClientSendMsgToClient(AchieveEntity.CSChatMessage msg)
         {
             var groupName = MessageUtils.GetGroupName(msg.fromuser.userid.ToString(), msg.touser.userid.ToString());
             /*
             中间处理一下消息直接转发给（A,B所在组织，即聊天窗口）
             */
-            msg.other = new { t = MessageConfig.ClientTypeCTC };
-            msg.msgtype = CSMessageType.Custom;//消息类型为普通消息
+            msg.other = new { t = "one" };
+            msg.msgtype = AchieveEntity.CSMessageType.Custom;//消息类型为普通消息
+            //添加消息记录
+            Sys_Chatrecord cd = new Sys_Chatrecord();
+            cd.F_Id = System.Guid.NewGuid().ToString();
+            cd.F_Type = 1;
+            cd.F_SendId = msg.fromuser.userid.ToString();
+            cd.F_Message = msg.msg;
+            cd.F_AcceptId = msg.touser.userid.ToString();
+            cd.F_CreatorTime = DateTime.Now;
+            cd.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
+            new Sys_LayimBLL().AddChatrecord(cd);
             return Clients.Group(groupName).receiveMessage(msg);
         }
 
@@ -89,14 +102,24 @@ namespace AchieveManageWeb
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task ClientSendMsgToGroup(CSChatMessage msg)
+        public Task ClientSendMsgToGroup(AchieveEntity.CSChatMessage msg)
         {
             //获取要推送的组织名称
             var groupName = MessageUtils.GetGroupName(msg.touser.userid.ToString());
             //附加信息，为群信息
-            msg.other = new { t = MessageConfig.ClientTypeCTG };
+            msg.other = new { t = "group" };
             //普通信息类型
-            msg.msgtype = CSMessageType.Custom;
+            msg.msgtype = AchieveEntity.CSMessageType.Custom;
+            //添加消息记录
+            Sys_Chatrecord cd = new Sys_Chatrecord();
+            cd.F_Id = System.Guid.NewGuid().ToString();
+            cd.F_Type = 2;
+            cd.F_SendId = msg.fromuser.userid.ToString();
+            cd.F_Message = msg.msg;
+            cd.F_AcceptId = msg.touser.userid.ToString();
+            cd.F_CreatorTime = DateTime.Now;
+            cd.F_CreatorUserId = OperatorProvider.Provider.GetCurrent().UserCode;
+            new Sys_LayimBLL().AddChatrecord(cd);
             return Clients.Group(groupName).receiveMessage(msg);
         }
     }

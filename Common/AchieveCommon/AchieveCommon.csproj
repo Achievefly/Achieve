@@ -81,6 +81,7 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="ListCommon.cs" />
     <Compile Include="Md5.cs" />
+    <Compile Include="MessageUtils.cs" />
     <Compile Include="ModelUtil.cs" />
     <Compile Include="Net\HttpMethods.cs" />
     <Compile Include="Net\Net.cs" />

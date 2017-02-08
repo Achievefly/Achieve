@@ -46,8 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layim\CSChatMessage.cs" />
+    <Compile Include="Layim\CSFriend.cs" />
+    <Compile Include="Layim\CSGroup.cs" />
+    <Compile Include="Layim\CSMessageType.cs" />
+    <Compile Include="Layim\CSResult.cs" />
+    <Compile Include="Layim\CSUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sys_Area.cs" />
+    <Compile Include="Sys_Chatrecord.cs" />
+    <Compile Include="Sys_Flock.cs" />
     <Compile Include="Sys_ItemsDetail.cs" />
     <Compile Include="Sys_Items.cs" />
     <Compile Include="Sys_Log.cs" />
@@ -56,12 +64,14 @@
     <Compile Include="Sys_ModuleForm.cs" />
     <Compile Include="Sys_ModuleFormInstance.cs" />
     <Compile Include="Sys_Organize.cs" />
+    <Compile Include="Sys_Relation.cs" />
     <Compile Include="Sys_RoleAuthorize.cs" />
     <Compile Include="Sys_Role.cs" />
     <Compile Include="Sys_User.cs" />
     <Compile Include="Sys_UserLogOn.cs" />
     <Compile Include="Sys_File.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
