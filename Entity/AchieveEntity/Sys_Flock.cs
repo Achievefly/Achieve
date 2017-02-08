@@ -25,11 +25,7 @@ namespace AchieveEntity
 		/// <summary>
 		/// 群公告
         /// </summary>
-        public string F_Description{ get; set; }
-        /// <summary>
-        /// 群分组
-        /// </summary>
-        public string F_Group { get; set; }  
+        public string F_Description{ get; set; } 
 		/// <summary>
 		/// 创建时间
         /// </summary>
